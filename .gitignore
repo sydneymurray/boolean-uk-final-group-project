@@ -1,0 +1,8 @@
+backend/node_modules
+backend/.env
+
+frontend/MIXEDUP-RECORDS/node_modules
+frontend/MIXEDUP-RECORDS/.DS_Store
+frontend/MIXEDUP-RECORDS/dist
+frontend/MIXEDUP-RECORDS/dist-ssr
+frontend/MIXEDUP-RECORDS/*.local
