@@ -1,0 +1,10 @@
+.headerStyling {
+  display: grid;
+  grid-auto-flow: column;
+  background-color: rgb(111, 180, 180);
+  padding: 50px;
+}
+
+.logInButton {
+  font-size: 1rem;
+}
