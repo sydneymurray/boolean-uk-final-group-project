@@ -1,5 +1,5 @@
 import React from "react";
-import "../components/modalStyling.css";
+import "../styles/modalStyling.css";
 import { useStore } from "../Hooks/Store";
 
 export default function ModalPopUp() {

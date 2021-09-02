@@ -1,38 +1,32 @@
 import React, { SyntheticEvent } from "react";
-import "../components/landingPageHeaderStyles.css";
+import "../styles/landingPageHeaderStyles.css";
 import { useStore } from "../Hooks/Store";
 import { useHistory } from "react-router-dom";
 
 export default function LandingPageHeader() {
   const setModal = useStore((store) => store.setModal);
-  const history = useHistory()
+  const history = useHistory();
 
   function handlesubmit(event: SyntheticEvent) {
-    
-    const {
-      "email" : email,
-      "pwd" : password
-    } = event.target as HTMLFormElement
+    const { email: email, pwd: password } = event.target as HTMLFormElement;
 
-    event.preventDefault()
+    event.preventDefault();
 
     const userDetails = {
       email: email.value,
-      password: password.value
-    }
+      password: password.value,
+    };
 
-    fetch("http://localhost:3100/login",{
+    fetch("http://localhost:3100/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userDetails)
-    })
-    .then(res=>{
+      body: JSON.stringify(userDetails),
+    }).then((res) => {
       if (res.ok) {
-        
       }
-    })
+    });
   }
 
   return (
