@@ -1,0 +1,24 @@
+.search-box-container{
+    display: grid;
+    grid-template:
+    ". search-heading . search-input ." auto/
+     2fr auto 1fr 4fr 2fr;
+     background-color: red;
+  }
+
+.search-box-heading{
+  display: inline-block;
+  grid-area: search-heading;
+}
+
+.search-box-input{
+  display: inline-block;
+  grid-area: search-input;
+  height: 30px;
+
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
