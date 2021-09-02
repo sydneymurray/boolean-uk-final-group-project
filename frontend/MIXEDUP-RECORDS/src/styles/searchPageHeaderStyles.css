@@ -1,0 +1,10 @@
+.favouriteButton,
+.sellButton,
+.logOutButton {
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 7px;
+  width: 100px;
+  height: 40px;
+}
