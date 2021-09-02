@@ -19,7 +19,7 @@ export default function LandingPageHeader() {
         <label htmlFor="email">Log In with Email:</label>
         <input type="email" id="email" name="email" />
         <label htmlFor="pwd">Password:</label>
-        <input type="password" id="pwd" name="pwd" minLength="8" />
+        <input type="password" id="pwd" name="pwd" minLength={8} />
         <button className="logInButton">Submit</button>
       </form>
     </header>
