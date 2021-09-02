@@ -4,12 +4,35 @@ import { useHistory } from "react-router-dom";
 import "../styles/searchPageHeaderStyles.css";
 
 export default function SearchPageHeader() {
+  const history = useHistory();
   return (
     <header className="headerStyling">
       <div>logo</div>
       <p>Logged in as Jonathon</p>
-      <button className="favouriteButton">Favourites</button>
-      <button className="sellButton">Sell</button>
+      <button
+        className="backButton"
+        onClick={() => {
+          history.push(`/search`);
+        }}
+      >
+        Back to Search
+      </button>
+      <button
+        className="favouriteButton"
+        onClick={() => {
+          history.push(`/favourites`);
+        }}
+      >
+        Favourites
+      </button>
+      <button
+        className="sellButton"
+        onClick={() => {
+          history.push(`/sell`);
+        }}
+      >
+        Sell
+      </button>
       <button className="logOutButton">Log Out</button>
     </header>
   );

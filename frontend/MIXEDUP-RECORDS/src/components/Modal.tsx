@@ -11,6 +11,8 @@ export default function ModalPopUp() {
         <h1>Sign up</h1>
         <label htmlFor="name">Name: </label>
         <input type="text" name="name" />
+        <label htmlFor="name">User Name: </label>
+        <input type="text" name="name" />
         <label htmlFor="name">Email: </label>
         <input type="email" name="email" />
         <label htmlFor="password">Password: </label>
