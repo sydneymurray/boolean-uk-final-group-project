@@ -10,6 +10,7 @@ import { ModalContainer } from "./pages/ModalContainer";
 import SearchPageHeader from "./components/SearchPageHeader";
 import Favourites from "./pages/Favourites";
 import Sell from "./pages/SellPage";
+import Transactions from "./pages/Transactions";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
         <Route path="/sell" exact>
           <SearchPageHeader />
           <Sell />
+        </Route>
+
+        <Route path="/transactions" exact>
+          <SearchPageHeader />
+          <Transactions />
         </Route>
 
         <Route>

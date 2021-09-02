@@ -33,6 +33,16 @@ export default function SearchPageHeader() {
       >
         Sell
       </button>
+
+      <button
+        className="transactionButton"
+        onClick={() => {
+          history.push(`/transactions`);
+        }}
+      >
+        My Transactions
+      </button>
+
       <button className="logOutButton">Log Out</button>
     </header>
   );

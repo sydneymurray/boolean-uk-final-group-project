@@ -1,11 +1,27 @@
 .favouriteButton,
 .backButton,
 .sellButton,
+.transactionButton,
 .logOutButton {
   font-size: 1rem;
   cursor: pointer;
   margin: 10px;
   border-radius: 7px;
-  width: 100px;
+  width: 120px;
   height: 40px;
+}
+
+.favouriteButton:hover,
+.backButton:hover,
+.transactionButton:hover,
+.sellButton:hover,
+.logOutButton:hover {
+  background-color: rgb(92, 121, 150);
+}
+
+.favouriteButton:focus,
+.transactionButton:focus,
+.sellButton:focus,
+.logOutButton:focus {
+  background-color: yellow;
 }
