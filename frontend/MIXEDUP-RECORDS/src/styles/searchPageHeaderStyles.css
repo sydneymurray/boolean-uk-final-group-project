@@ -25,3 +25,7 @@
 .logOutButton:focus {
   background-color: yellow;
 }
+
+.logo {
+  width: 250px;
+}

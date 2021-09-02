@@ -7,7 +7,11 @@ export default function SearchPageHeader() {
   const history = useHistory();
   return (
     <header className="headerStyling">
-      <div>logo</div>
+      <img
+        className="logo"
+        src="../../Public/images/Mixedup-logo.png"
+        alt="mixed up logo"
+      />
       <p>Logged in as Jonathon</p>
       <button
         className="backButton"

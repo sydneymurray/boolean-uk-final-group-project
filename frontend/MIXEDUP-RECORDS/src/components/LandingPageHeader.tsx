@@ -31,7 +31,11 @@ export default function LandingPageHeader() {
 
   return (
     <header className="headerStyling">
-      <img src="../images/Mixedup-logo.png" alt="mixed up logo" />
+      <img
+        className="logo"
+        src="../../Public/images/Mixedup-logo.png"
+        alt="mixed up logo"
+      />
       <div
         className="modalPopUp"
         onClick={() => {
