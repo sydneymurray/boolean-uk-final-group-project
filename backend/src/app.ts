@@ -3,8 +3,9 @@ import cookieParser from "cookie-parser"
 import logger from "morgan"
 import express from "express"
 import { config } from "dotenv"
-import userRouter from "./resources/user/routes"
+import userRouter from "./resources/User/routes"
 import cors from "cors"
+import authRouter from "./resources/Auth/routes"
 
 config()
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 
 // app.use('/', indexRouter);
 app.use('/users', userRouter);
+app.use(authRouter)
 
 // catch 404 and forward to error handler
 app.all("*",(req ,res)=> {

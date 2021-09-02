@@ -12,22 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = exports.getOneUser = void 0;
-const service_1 = __importDefault(require("./service"));
-const JWTGenerator_1 = require("../../utils/JWTGenerator");
-const getOneUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = parseInt(req.params.id);
-    const currentUser = yield service_1.default.findUnique({
-        where: { id }
+exports.findUserWithValidation = void 0;
+const client_1 = __importDefault(require("../../utils/client"));
+const bcrypt_1 = require("bcrypt");
+const findUserWithValidation = (userData) => __awaiter(void 0, void 0, void 0, function* () {
+    const userDataFromDB = yield client_1.default.user.findUnique({
+        where: {
+            email: userData.email
+        }
     });
-    res.json({ data: currentUser });
+    if (!userDataFromDB)
+        throw new Error("Username/Password is incorrect");
+    const isPasswordValid = yield (0, bcrypt_1.compare)(userData.password, userDataFromDB.password);
+    if (!isPasswordValid)
+        throw new Error("Username/Password is incorrect");
+    return userDataFromDB;
 });
-exports.getOneUser = getOneUser;
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newUser = req.body;
-    const savedUser = yield service_1.default.create({ data: newUser });
-    const token = (0, JWTGenerator_1.createToken)({ id: savedUser.id, username: savedUser.username });
-    res.cookie("token", token, { httpOnly: true });
-    res.json({ user: { id: savedUser.id, username: savedUser.username } });
-});
-exports.createUser = createUser;
+exports.findUserWithValidation = findUserWithValidation;
