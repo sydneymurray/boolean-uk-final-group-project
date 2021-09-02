@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { User } from ".prisma/client"
+import { User } from "prisma/prisma-client"
 import { findUserWithValidation } from "./service"
 import { createToken } from "../../utils/JWTGenerator"
 

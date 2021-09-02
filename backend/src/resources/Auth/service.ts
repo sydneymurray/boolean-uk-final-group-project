@@ -1,5 +1,5 @@
 import dbClient from "../../utils/client"
-import { User } from ".prisma/client"
+import { User } from "prisma/prisma-client"
 import { compare } from "bcrypt"
 
 export const findUserWithValidation = async (userData: User) => {
