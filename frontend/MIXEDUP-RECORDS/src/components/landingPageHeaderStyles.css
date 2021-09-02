@@ -7,4 +7,13 @@
 
 .logInButton {
   font-size: 1rem;
+  cursor: pointer;
+}
+
+.modalPopUp {
+  cursor: pointer;
+}
+
+.modalJoinButton {
+  cursor: pointer;
 }
