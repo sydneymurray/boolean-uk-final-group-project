@@ -20,6 +20,7 @@ function App() {
           <FourOFour/>
         </Route>         
       </Switch>
+      <ModalContainer/>
     </>)
 }
 

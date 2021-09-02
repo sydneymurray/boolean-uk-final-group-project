@@ -1,10 +1,11 @@
+  
 .search-box-container{
     display: grid;
     grid-template:
     ". search-heading . search-input ." auto/
      2fr auto 1fr 4fr 2fr;
-     background-color: red;
-  }
+     background-color: rgb(92, 121, 150);
+}
 
 .search-box-heading{
   display: inline-block;
@@ -21,4 +22,17 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
+.results-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    grid-gap: 2ch;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 30px;
+    align-content: center;
+    background-color: rgb(92, 121, 150); 
+    padding-top: 20px;
+    padding-left:5%;
+  }
 

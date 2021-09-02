@@ -6,17 +6,23 @@ import {useStore} from "../Hooks/Store"
 //////
 // GENERATE DUMMY DATA ARRAY
 type Listing = {
-    artitsName:String,
-    trackName:String,
-    owner:String,
-    coverURL:String
+    artistName:string,
+    trackName:string,
+    owner:string,
+    coverURL:string,
+    condition:string,
+    format:string,
+    price:number
   }
 
 let listing:Listing = {
-  artitsName:"Blondie",
+  artistName:"Blondie",
   trackName:"Dreaming",
   owner:"Joe Blogs",
-  coverURL:"https://images.eil.com/large_image/BLONDIE_DREAMING-330467.jpg"
+  coverURL:"https://images.eil.com/large_image/BLONDIE_DREAMING-330467.jpg",
+  condition:"Good",
+  format:"7 Inch",
+  price:5.49
 }
 
 let listings:Listing[]= []

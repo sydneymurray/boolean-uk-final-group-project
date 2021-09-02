@@ -4,7 +4,7 @@ import { useStore } from "../Hooks/Store";
 
 export default function ModalPopUp() {
   const setModal = useStore((store) => store.setModal);
-  const setUser = useStore((store) => store.setUser);
+  //const setUser = useStore((store) => store.setUser);
   return (
     <div className="modal-bg">
       <div className="modal">
