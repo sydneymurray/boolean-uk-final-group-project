@@ -1,7 +1,10 @@
 import React from "react";
 import "../components/modalStyling.css";
+import { useStore } from "../Hooks/Store";
 
 export default function ModalPopUp() {
+  const setModal = useStore((store) => store.setModal);
+  const setUser = useStore((store) => store.setUser);
   return (
     <div className="modal-bg">
       <div className="modal">
@@ -12,7 +15,15 @@ export default function ModalPopUp() {
         <input type="email" name="email" />
         <label htmlFor="password">Password: </label>
         <input type="password" name="password" />
-        <button>Join</button>
+        <button className="modalJoinButton">Join</button>
+        <span
+          className="modalClose"
+          onClick={() => {
+            setModal("");
+          }}
+        >
+          ❎
+        </span>
       </div>
     </div>
   );
