@@ -25,7 +25,9 @@ export default function LandingPageHeader() {
       body: JSON.stringify(userDetails),
     }).then((res) => {
       if (res.ok) {
+        history.push("/search")
       }
+      else setModal("wrongDetails")
     });
   }
 
