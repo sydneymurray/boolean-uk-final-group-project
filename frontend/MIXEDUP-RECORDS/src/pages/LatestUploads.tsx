@@ -3,33 +3,25 @@ import "../styles/LatestUploads.css"
 import RenderTrack from "../components/RenderTrack"
 import {useStore} from "../Hooks/Store"
 
-// IMPORT DUMMY DATA UNTIL BACKEND IS COMPLETE
-import {listings} from "../components/dummyData"
-
-
 export default function LatestUploads(){
 
-  //let listings = useStore(store=>store.listings)
-  //let setListings = useStore(store=>store.setListings)      
-  /* This will be the actual code for this screen
-  let searchListings = useStore(store => store.searchListings)
-  let retrieveListings = useStore(store => store.retrieveListings)
-  let listinmgs = useStore(store => store.listings)
-  if (!listimgs){
-    retrieveListings()
-    return
-  }
-  */
-  let filteredListings = listings
+  let listings = useStore(store=>store.listings)
+  let filteredListings = useStore(store=>store.filteredListings)
+  let setfilteredListings = useStore(store=> store.setfilteredListings)
+
+  if (!listings) return <></>
+  filteredListings = listings
+
   function filterListings(inputText:string){
-    console.log(inputText)  
     filteredListings=[]
+    if (!listings) return 
     filteredListings = listings.filter(listing=>{
-      if(listing.artistName.toUpperCase().includes("ERROL")) return 1    
+      // if(listing.artistName.toUpperCase().includes("ERROL")) return 1    
       if(listing.artistName.toUpperCase().includes(inputText.toUpperCase())) return 1  
       if(listing.trackName.toUpperCase().includes(inputText.toUpperCase())) return 1 
       return 0 
     })
+    setfilteredListings(filteredListings)
   } 
 
   return <>
