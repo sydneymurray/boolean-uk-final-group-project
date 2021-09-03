@@ -1,5 +1,5 @@
 // DUMMY DATA UNTIL BACKEND IS COMPLETE
-export let listings =[
+export let dummyListings = [
     {
         artistName:"Blondie",
         trackName:"Dreaming",

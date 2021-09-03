@@ -11,8 +11,12 @@ import SearchPageHeader from "./components/SearchPageHeader";
 import Favourites from "./pages/Favourites";
 import Sell from "./pages/SellPage";
 import Transactions from "./pages/Transactions";
+import {useStore} from "./Hooks/Store"
 
 function App() {
+  let retrieveListings = useStore(store=>store.retrieveListings)
+  retrieveListings()
+
   return (
     <>
       <Switch>

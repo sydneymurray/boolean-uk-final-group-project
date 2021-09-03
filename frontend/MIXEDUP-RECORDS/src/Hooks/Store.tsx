@@ -1,13 +1,19 @@
 import create from "zustand";
 import {LATEST_LISTINGS} from "../components/dbURLS"
 
+// IMPORT DUMMY DATA UNTIL BACKEND IS COMPLETE
+import {dummyListings} from "../components/dummyData"
+
+
 type Store = {
   modal: string,
   setModal: (modalName: string) => void,
-  latestListings: Listing[] | null,
-  setLatestListings: (filteredListings:Listing[]) => void
+  listings: Listing[] | null,
+  filteredListings: Listing[] | null,
+  setfilteredListings: (filteredListings:Listing[]) => void
+  retrieveListings: () => void
   newUser: newUserType | null;
-   setUser: (newUser: newUserType) => void;
+  setUser: (newUser: newUserType) => void;
 };
 
 type newUserType = {
@@ -35,10 +41,15 @@ export const useStore = create<Store>((set, get) => ({
     }))
   },
   listings: null,
-  latestListings: null,
-  setLatestListings: (filteredListings:Listing[]) => {
+  filteredListings: null,
+  setfilteredListings: (filteredListings:Listing[]) => {
     set((store) => ({
-      latestListings: filteredListings
+      filteredListings: filteredListings
+    }))
+  },
+  retrieveListings: () => {
+    set((store) => ({
+      listings: dummyListings
     }))
   },
   newUser: null,
