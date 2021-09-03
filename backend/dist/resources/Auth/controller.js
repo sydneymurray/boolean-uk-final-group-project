@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = void 0;
+exports.createUser = exports.loginUser = void 0;
 const service_1 = require("./service");
 const JWTGenerator_1 = require("../../utils/JWTGenerator");
+const service_2 = require("./service");
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const loginDetails = req.body;
     try {
@@ -25,3 +26,11 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.loginUser = loginUser;
+const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newUser = req.body;
+    const savedUser = yield service_2.user.create({ data: newUser });
+    const token = (0, JWTGenerator_1.createToken)({ id: savedUser.id, username: savedUser.username });
+    res.cookie("token", token, { httpOnly: true });
+    res.json({ user: { id: savedUser.id, username: savedUser.username } });
+});
+exports.createUser = createUser;

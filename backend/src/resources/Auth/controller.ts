@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { User } from "prisma/prisma-client"
 import { findUserWithValidation } from "./service"
 import { createToken } from "../../utils/JWTGenerator"
+import { user } from "./service";
 
 export const loginUser = async (req: Request, res: Response) => {
     const loginDetails: User = req.body
@@ -15,4 +16,13 @@ export const loginUser = async (req: Request, res: Response) => {
     } catch (error: any) {
         res.status(401).json({ msg: error.message })
     }
+}
+
+export const createUser = async (req: Request, res: Response) => {
+    const newUser = req.body
+    const savedUser = await user.create({ data: newUser })
+
+    const token = createToken({ id: savedUser.id, username: savedUser.username })
+    res.cookie("token", token, { httpOnly: true })
+    res.json({ user: { id: savedUser.id, username: savedUser.username }})
 }
