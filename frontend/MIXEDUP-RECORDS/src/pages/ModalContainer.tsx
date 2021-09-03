@@ -1,6 +1,6 @@
 import { useStore } from "../Hooks/Store";
 import React from "react";
-import Modal from "../components/Modal";
+import Modal from "../components/SignUpModal";
 
 type modal = {
   [index: string]: null | (() => JSX.Element);
