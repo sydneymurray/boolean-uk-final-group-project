@@ -9,6 +9,8 @@ import {listings} from "../components/dummyData"
 
 export default function LatestUploads(){
 
+  //let listings = useStore(store=>store.listings)
+  //let setListings = useStore(store=>store.setListings)      
   /* This will be the actual code for this screen
   let searchListings = useStore(store => store.searchListings)
   let retrieveListings = useStore(store => store.retrieveListings)

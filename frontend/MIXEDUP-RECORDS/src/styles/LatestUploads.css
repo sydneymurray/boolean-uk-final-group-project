@@ -25,7 +25,6 @@
 .results-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, 200px);
-    grid-gap: auto;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 30px;
