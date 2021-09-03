@@ -6,8 +6,18 @@ import { config } from "dotenv"
 import userRouter from "./resources/User/routes"
 import cors from "cors"
 import authRouter from "./resources/Auth/routes"
+import { validateToken } from "./utils/JWTGenerator"
+import { JwtPayload } from 'jsonwebtoken';
 
 config()
+
+declare global {
+  namespace Express {
+      interface Request {
+          currentUser: string | JwtPayload
+      }
+  }
+}
 
 var app = express();
 
@@ -25,6 +35,16 @@ app.use(cookieParser());
 // app.use('/', indexRouter);
 app.use('/users', userRouter);
 app.use(authRouter)
+app.use((req, res, next) => {
+  const token = req.cookies.token
+  const userData = validateToken(token)
+  if (userData) {
+    req.currentUser = userData
+    next()
+  } else {
+    res.status(401).json({ err: "You are not logged in" })
+  }
+})
 
 // catch 404 and forward to error handler
 app.all("*",(req ,res)=> {
