@@ -1,5 +1,5 @@
 import React from "react";
-import "../components/recordFromDbStyling.css";
+import "../styles/recordFromDbStyling.css";
 
 export default function RecordFromDb() {
   return (
