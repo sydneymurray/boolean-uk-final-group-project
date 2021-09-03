@@ -1,9 +1,10 @@
 import create from "zustand";
 
 type Store = {
-  modal: string;
-  setModal: (modalName: string) => void;
-
+  modal: string,
+  setModal: (modalName: string) => void,
+  latestListings: Listing[] | null,
+  setLatestListings: (filteredListings:Listing[]) => void
   // newUser: newUserType | null;
   // setUser: (newUser: newUserType) => void;
 };
@@ -14,6 +15,17 @@ type Store = {
 //   password: string;
 // };
 
+type Listing = {
+  artistName:string,
+  trackName:string,
+  owner:string,
+  coverURL:string,
+  condition:string,
+  format:string,
+  price:number
+}
+
+
 export const useStore = create<Store>((set, get) => ({
   modal: "",
   setModal: (modalName: string) => {
@@ -21,6 +33,11 @@ export const useStore = create<Store>((set, get) => ({
       modal: modalName,
     }));
   },
+  latestListings: null,
+  setLatestListings: (filteredListings:Listing[]) => {
+    set((store) => ({
+      latestListings: filteredListings
+    }));
 
   // newUser: null,
   // setUser: (user: newUserType) => {
