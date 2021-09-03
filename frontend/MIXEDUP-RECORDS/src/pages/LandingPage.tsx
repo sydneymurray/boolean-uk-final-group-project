@@ -7,26 +7,7 @@ export default function LandingPage() {
   return (
     <>
       <LandingPageHeader />
-      <div className="recordCardsDb">
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-        <RecordFromDb />
-      </div>
+      <div className="recordCardsDb"></div>
     </>
   );
 }

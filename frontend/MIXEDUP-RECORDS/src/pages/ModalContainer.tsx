@@ -1,7 +1,8 @@
 import { useStore } from "../Hooks/Store";
 import React from "react";
+
 import SignUpModal from "../components/SignUpModal";
-import IncorrectLoginModal from "../components/IncorrectLoginModal"
+import IncorrectLoginModal from "../components/IncorrectLoginModal";
 
 type modal = {
   [index: string]: null | (() => JSX.Element);
@@ -10,7 +11,7 @@ type modal = {
 const modals: modal = {
   "": null,
   newUser: SignUpModal,
-  wrongDetails: IncorrectLoginModal
+  wrongDetails: IncorrectLoginModal,
 };
 
 export function ModalContainer() {
