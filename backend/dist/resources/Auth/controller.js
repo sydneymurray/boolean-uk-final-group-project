@@ -28,9 +28,14 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.loginUser = loginUser;
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newUser = req.body;
-    const savedUser = yield service_2.user.create({ data: newUser });
-    const token = (0, JWTGenerator_1.createToken)({ id: savedUser.id, username: savedUser.username });
-    res.cookie("token", token, { httpOnly: true });
-    res.json({ user: { id: savedUser.id, username: savedUser.username } });
+    try {
+        const savedUser = yield service_2.user.create({ data: newUser });
+        const token = (0, JWTGenerator_1.createToken)({ id: savedUser.id, username: savedUser.username });
+        res.cookie("token", token, { httpOnly: true });
+        res.json({ user: { id: savedUser.id, username: savedUser.username } });
+    }
+    catch (error) {
+        res.status(412).json({ msg: "You probably entered the sign up data in an invalid way " });
+    }
 });
 exports.createUser = createUser;

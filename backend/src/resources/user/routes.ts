@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getOneUser } from "./controller";
+import { getCurrentUser } from "./controller";
 
 const userRouter = Router()
 
-userRouter.get("/:id", getOneUser)
+userRouter.get("/current", getCurrentUser)
 
 export default userRouter 

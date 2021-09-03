@@ -18,6 +18,7 @@ export default function LandingPageHeader() {
     };
 
     fetch("http://localhost:3100/login", {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +29,9 @@ export default function LandingPageHeader() {
         history.push("/search")
       }
       else setModal("wrongDetails")
-    });
+    }).catch((Error) => {
+      console.error(Error)
+    })
   }
 
   return (
