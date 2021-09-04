@@ -16,6 +16,7 @@ import {useStore} from "./Hooks/Store"
 function App() {
   let retrieveListings = useStore(store=>store.retrieveListings)
   retrieveListings()
+  console.log("App starts")
 
   return (
     <>
