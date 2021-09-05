@@ -23,7 +23,6 @@ export default function LatestUploads(){
 
     filteredListings=[]
     filteredListings = listings.filter(listing=>{
-      // if(listing.artistName.toUpperCase().includes("ERROL")) return 1    
       if(listing.artistName.toUpperCase().includes(inputText.toUpperCase())) return 1  
       if(listing.trackName.toUpperCase().includes(inputText.toUpperCase())) return 1 
       return 0 
