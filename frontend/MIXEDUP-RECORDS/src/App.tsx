@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
@@ -15,7 +15,10 @@ import {useStore} from "./Hooks/Store"
 
 function App() {
   let retrieveListings = useStore(store=>store.retrieveListings)
-  retrieveListings()
+  
+  useEffect(()=>{
+    retrieveListings()
+  },[])
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import "../styles/LatestUploads.css"
 import RenderTrack from "../components/RenderTrack"
 import {useStore} from "../Hooks/Store"
@@ -9,8 +9,7 @@ export default function LatestUploads(){
   let filteredListings = useStore(store=>store.filteredListings)
   let setfilteredListings = useStore(store=> store.setfilteredListings)
 
-  if (!filteredListings) return <></>
-
+  
   function filterListings(inputText:string){
     if (!listings){
       listings=[]
@@ -23,12 +22,18 @@ export default function LatestUploads(){
 
     filteredListings=[]
     filteredListings = listings.filter(listing=>{
-      if(listing.artistName.toUpperCase().includes(inputText.toUpperCase())) return 1  
-      if(listing.trackName.toUpperCase().includes(inputText.toUpperCase())) return 1 
+      if(listing.Track ? listing.Track.artistName.toUpperCase().includes(inputText.toUpperCase()) : false) return 1  
+      if(listing.Track ? listing.Track.trackName.toUpperCase().includes(inputText.toUpperCase()) : false) return 1 
       return 0 
     })
     setfilteredListings(filteredListings)
   } 
+
+  useEffect(()=>{
+    filterListings("")
+  },[])
+  
+  if (!filteredListings) return <></>
 
   return <>
     <div className="search-box-container">

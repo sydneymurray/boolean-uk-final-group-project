@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = exports.loginUser = void 0;
+exports.getAllListings = exports.createUser = exports.loginUser = void 0;
 const service_1 = require("./service");
 const JWTGenerator_1 = require("../../utils/JWTGenerator");
 const service_2 = require("./service");
+const client_1 = __importDefault(require("../../utils/client"));
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const loginDetails = req.body;
     try {
@@ -39,3 +43,42 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.createUser = createUser;
+const getAllListings = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allListings = yield client_1.default.listings.findMany({
+            select: {
+                price: true,
+                forSale: true,
+                notes: true,
+                condition: true,
+                format: true,
+                User: {
+                    select: {
+                        name: true,
+                        username: true,
+                        email: true
+                    }
+                },
+                Track: {
+                    select: {
+                        artistName: true,
+                        trackName: true,
+                        coverURL: true
+                    }
+                },
+                Album: {
+                    select: {
+                        artist: true,
+                        albumname: true,
+                        coverURL: true
+                    }
+                }
+            }
+        });
+        res.json({ data: allListings });
+    }
+    catch (error) {
+        res.status(500).json({ msg: "There seems to be a problem with our servers" });
+    }
+});
+exports.getAllListings = getAllListings;
