@@ -61,4 +61,6 @@ export let listings =[
         format:"7 Inch",
         price:5.49
       }
+
+    
 ]
