@@ -12,7 +12,10 @@ export default function SearchPageHeader() {
     fetch("http://localhost:3100/users/current", {
       credentials: "include"
     })
-    .then(res=>res.json())
+    .then(res=>{
+      if (!res.ok) history.push("/")
+      else return res.json()
+    })
     .then(data=>setUserName(data.data.name))
     .catch((Error)=>{
       console.error(Error);
