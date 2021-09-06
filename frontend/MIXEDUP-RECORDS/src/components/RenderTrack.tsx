@@ -6,6 +6,7 @@ type Prop = {
 }
 
 type listing = {
+    id:number,
     artistName:string,
     trackName:string,
     owner:string,
@@ -15,16 +16,13 @@ type listing = {
     price:number
   }
 
-
-
-
 export default function RenderTrack({listing}:Prop){
   
   return<>
-    <article className="listing-article">
+    <article className="listing-article" key={listing.id}>
       <div className="recordImage">
         <img className="albumImage"
-          src={listing.coverURL} alt="Beanie Man Album"/>
+          src={listing.coverURL} alt={listing.trackName}/>
       </div>
         <div className="recordInfoDb">
         <div className="artistCardTextInfo">Artist: {listing.artistName}</div>
