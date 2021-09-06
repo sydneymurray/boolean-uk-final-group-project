@@ -3,6 +3,7 @@ import { User } from "prisma/prisma-client"
 import { findUserWithValidation } from "./service"
 import { createToken } from "../../utils/JWTGenerator"
 import { user } from "./service";
+import dbClient from "../../utils/client";
 
 export const loginUser = async (req: Request, res: Response) => {
     const loginDetails: User = req.body
@@ -28,5 +29,14 @@ export const createUser = async (req: Request, res: Response) => {
         res.json({ user: { id: savedUser.id, username: savedUser.username }})
     } catch (error) {
         res.status(412).json({ msg: "You probably entered the sign up data in an invalid way "})
+    }
+}
+
+export const getAllListings = async (req: Request, res: Response) => {
+    try {
+        const allListings = await dbClient.listings.findMany()
+        res.json({data: allListings})
+    } catch (error) {
+        res.status(500).json({msg: "There seems to be a problem with our servers"})
     }
 }
