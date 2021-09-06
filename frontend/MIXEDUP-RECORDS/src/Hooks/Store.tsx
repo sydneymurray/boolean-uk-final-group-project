@@ -42,22 +42,16 @@ export const useStore = create<Store>((set, get) => ({
   },
   listings: null,
   filteredListings: null,
-  setfilteredListings: (filteredListings:Listing[]) => {
-    set((store) => ({
-      filteredListings: filteredListings
-    }))
-  },
-  retrieveListings: () => {
-    set((store) => ({
-      listings: dummyListings
-    }))
-  },
+  setfilteredListings: (filteredListings:Listing[]) => {set((store) => ({filteredListings: filteredListings }))},
+  retrieveListings: () => {set((store) => ({
+    listings: dummyListings,
+    filteredListings: dummyListings}))},
   newUser: null,
-  setUser: (user: newUserType) => {
-    set((store) => ({
-      newUser: user,
-    }))
-  },
+  setUser: (user: newUserType) => {set((store) => ({newUser: user}))}
 }))
+
+
+
+
 
 

@@ -2,7 +2,10 @@ import React from "react"
 import "../styles/RenderTrack.css"
 
 type Prop = {
-  listing: {
+  listing : listing
+}
+
+type listing = {
     artistName:string,
     trackName:string,
     owner:string,
@@ -11,7 +14,8 @@ type Prop = {
     format:string,
     price:number
   }
-}
+
+
 
 
 export default function RenderTrack({listing}:Prop){
@@ -36,4 +40,18 @@ export default function RenderTrack({listing}:Prop){
     </article> 
   </>
 }
+
+/*
+type Prop = {
+  listing: {
+    artistName:string,
+    trackName:string,
+    owner:string,
+    coverURL:string,
+    condition:string,
+    format:string,
+    price:number
+  }
+}
+*/
 
