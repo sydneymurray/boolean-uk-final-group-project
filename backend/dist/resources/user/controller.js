@@ -12,13 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOneUser = void 0;
+exports.getCurrentUser = void 0;
 const client_1 = __importDefault(require("../../utils/client"));
-const getOneUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = parseInt(req.params.id);
-    const currentUser = yield client_1.default.user.findUnique({
-        where: { id }
-    });
-    res.json({ data: currentUser });
+const getCurrentUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const authDetails = req.currentUser;
+    try {
+        const currentUser = yield client_1.default.user.findUnique({
+            where: { id: Number(authDetails.id) },
+            select: {
+                id: true,
+                name: true,
+                username: true,
+                email: true
+            }
+        });
+        res.json({ data: currentUser });
+    }
+    catch (error) {
+        res.status(401).json({ msg: "You don't seem to be logged in???" });
+    }
 });
-exports.getOneUser = getOneUser;
+exports.getCurrentUser = getCurrentUser;

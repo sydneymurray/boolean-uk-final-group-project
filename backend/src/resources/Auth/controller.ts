@@ -20,9 +20,13 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
     const newUser = req.body
-    const savedUser = await user.create({ data: newUser })
-
-    const token = createToken({ id: savedUser.id, username: savedUser.username })
-    res.cookie("token", token, { httpOnly: true })
-    res.json({ user: { id: savedUser.id, username: savedUser.username }})
+    try {
+        const savedUser = await user.create({ data: newUser })
+    
+        const token = createToken({ id: savedUser.id, username: savedUser.username })
+        res.cookie("token", token, { httpOnly: true })
+        res.json({ user: { id: savedUser.id, username: savedUser.username }})
+    } catch (error) {
+        res.status(412).json({ msg: "You probably entered the sign up data in an invalid way "})
+    }
 }
