@@ -34,7 +34,36 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getAllListings = async (req: Request, res: Response) => {
     try {
-        const allListings = await dbClient.listings.findMany()
+        const allListings = await dbClient.listings.findMany({
+            select : {
+                price: true,
+                forSale: true,
+                notes: true,
+                condition: true,
+                format: true,
+                User: {
+                    select: {
+                        name: true,
+                        username: true,
+                        email: true
+                    }
+                },
+                Track: {
+                    select: {
+                        artistName: true,
+                        trackName: true,
+                        coverURL: true
+                    }
+                },
+                Album: {
+                    select: {
+                        artist: true,
+                        albumname: true,
+                        coverURL: true
+                    }
+                }
+            }
+        })
         res.json({data: allListings})
     } catch (error) {
         res.status(500).json({msg: "There seems to be a problem with our servers"})

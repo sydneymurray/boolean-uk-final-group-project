@@ -23,13 +23,22 @@ type newUserType = {
 };
 
 type Listing = {
-  artistName:string,
-  trackName:string,
-  owner:string,
-  coverURL:string,
-  condition:string,
-  format:string,
-  price:number
+  id: Number,
+  User: {
+    name: string
+  },
+  Track: {
+    artistName: string,
+    trackName: string,
+    coverURL: string
+  } | null,
+  Album: object | null,
+  price: Number,
+  forSale: boolean,
+  notes: string,
+  condition: string,
+  format: string,
+  dateAdded: string
 }
 
 
@@ -43,9 +52,15 @@ export const useStore = create<Store>((set, get) => ({
   listings: null,
   filteredListings: null,
   setfilteredListings: (filteredListings:Listing[]) => {set((store) => ({filteredListings: filteredListings }))},
-  retrieveListings: () => {set((store) => ({
-    listings: dummyListings,
-    filteredListings: dummyListings}))},
+  retrieveListings: () => {
+    fetch("http://localhost:3100/listings")
+    .then(res=>res.json())
+    .then((data:{
+      data: Listing[]
+    })=>{
+      set(store=>({listings: data.data}))
+    })
+  },
   newUser: null,
   setUser: (user: newUserType) => {set((store) => ({newUser: user}))}
 }))
