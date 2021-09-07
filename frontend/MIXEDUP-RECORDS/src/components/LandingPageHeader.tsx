@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from "react";
 import "../styles/landingPageHeaderStyles.css";
 import { useStore } from "../Hooks/Store";
 import { useHistory } from "react-router-dom";
+import { LOGIN_CHECK } from "./dbURLS";
 
 export default function LandingPageHeader() {
   const setModal = useStore((store) => store.setModal);
@@ -17,7 +18,7 @@ export default function LandingPageHeader() {
       password: password.value,
     };
 
-    fetch("http://localhost:3100/login", {
+    fetch(LOGIN_CHECK, {
       credentials: "include",
       method: "POST",
       headers: {

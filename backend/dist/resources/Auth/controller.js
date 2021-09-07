@@ -78,6 +78,7 @@ const getAllListings = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.json({ data: allListings });
     }
     catch (error) {
+        console.error(error);
         res.status(500).json({ msg: "There seems to be a problem with our servers" });
     }
 });
