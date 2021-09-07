@@ -1,10 +1,27 @@
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useStore } from "../Hooks/Store";
 import { useHistory } from "react-router-dom";
 import "../styles/searchPageHeaderStyles.css";
 
 export default function SearchPageHeader() {
+  const [userName, setUserName] = useState("")
+
   const history = useHistory();
+
+  useEffect( () => {
+    fetch("http://localhost:3100/users/current", {
+      credentials: "include"
+    })
+    .then(res=>{
+      if (!res.ok) history.push("/")
+      else return res.json()
+    })
+    .then(data=>setUserName(data.data.name))
+    .catch((Error)=>{
+      console.error(Error);
+    }) 
+  }, [])
+
   return (
     <header className="headerStyling">
       <img
@@ -12,7 +29,7 @@ export default function SearchPageHeader() {
         src="../../Public/images/Mixedup-logo.png"
         alt="mixed up logo"
       />
-      <p>Logged in as Jonathon</p>
+      <p>{`Logged in as ${userName}`}</p>
       <button
         className="backButton"
         onClick={() => {

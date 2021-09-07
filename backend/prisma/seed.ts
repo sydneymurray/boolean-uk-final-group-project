@@ -1,11 +1,11 @@
 import { PrismaClient } from ".prisma/client"
 import { hash } from "bcrypt";
 
-import { users } from "../src/utils/mockData"
+import { users, tracks, listings } from "../src/utils/mockData"
 
 const prisma = new PrismaClient()
 
-console.log("Here are my imports, ", users);
+console.log("Here are my imports, ", users, tracks, listings);
 
 async function seed() {
     for (let user of users) {
@@ -13,6 +13,16 @@ async function seed() {
         user = {...user, password: hashedPassword}
         await prisma.user.create({
             data: user
+        })
+    }
+    for (const track of tracks) {
+        await prisma.track.create({
+            data: track
+        })
+    }
+    for (const listing of listings) {
+        await prisma.listings.create({
+            data: listing
         })
     }
 }

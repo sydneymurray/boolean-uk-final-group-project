@@ -7,7 +7,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = require("dotenv");
-const routes_1 = __importDefault(require("./resources/User/routes"));
+const routes_1 = __importDefault(require("./resources/user/routes"));
 const cors_1 = __importDefault(require("cors"));
 const routes_2 = __importDefault(require("./resources/Auth/routes"));
 const JWTGenerator_1 = require("./utils/JWTGenerator");
@@ -23,7 +23,6 @@ app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 //app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
-app.use('/users', routes_1.default);
 app.use(routes_2.default);
 app.use((req, res, next) => {
     const token = req.cookies.token;
@@ -36,6 +35,7 @@ app.use((req, res, next) => {
         res.status(401).json({ err: "You are not logged in" });
     }
 });
+app.use('/users', routes_1.default);
 // catch 404 and forward to error handler
 app.all("*", (req, res) => {
     res.status(404).json("Route Not Found");

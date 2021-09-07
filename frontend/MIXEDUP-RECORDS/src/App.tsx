@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
@@ -11,8 +11,15 @@ import SearchPageHeader from "./components/SearchPageHeader";
 import Favourites from "./pages/Favourites";
 import Sell from "./pages/SellPage";
 import Transactions from "./pages/Transactions";
+import {useStore} from "./Hooks/Store"
 
 function App() {
+  let retrieveListings = useStore(store=>store.retrieveListings)
+  
+  useEffect(()=>{
+    retrieveListings()
+  },[])
+
   return (
     <>
       <Switch>

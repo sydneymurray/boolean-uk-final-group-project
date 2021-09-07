@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW")
 }
 
@@ -11,11 +11,51 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 model User {
+  id          Int       @id @default(autoincrement())
+  name        String
+  username    String
+  email       String    @unique
+  password    String
+  Listings Listings[]
+}
+
+model Track {
+  id         Int        @id @default(autoincrement())
+  artistName String     @db.VarChar(255)
+  trackName  String     @db.VarChar(255)
+  coverURL   String     @db.VarChar(255)
+  Listings   Listings[]
+}
+
+enum Format {
+  DUBPLATE
+  MP3
+  VINYL6
+  VINAL7
+  VINAL10
+  VINAL12
+}
+
+model Listings {
+  id        Int      @id @default(autoincrement())
+  user      Int
+  User      User     @relation(fields: [user], references: [id])
+  track     Int
+  Track     Track    @relation(fields: [track], references: [id])
+  price     Int
+  forSale   Boolean  @default(true)
+  notes     String   @db.VarChar(255)
+  condition String   @db.VarChar(255)
+  format    Format   @default(MP3)
+  dateAdded DateTime @default(now())
+
+}
+
+model Album {
   id Int @id @default(autoincrement())
-  name String
-  username String
-  email String @unique
-  password String
+  artist String
+  albumname String
+  coverURL String
+  Listings Listings[]
 }
