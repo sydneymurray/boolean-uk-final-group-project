@@ -20,7 +20,7 @@ export default function ModalPopUp() {
     
     registerUser(newUser).then(data => {
       setModal("")
-      alert("Login username "+data.user.username+" succesfully created")
+      alert("Login username "+data.user.username+" succesfully created "+data.user.id)
     })
   }
 
