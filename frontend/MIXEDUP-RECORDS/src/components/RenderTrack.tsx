@@ -6,15 +6,23 @@ type Prop = {
 }
 
 type listing = {
-    id:number,
-    artistName:string,
-    trackName:string,
-    owner:string,
-    coverURL:string,
-    condition:string,
-    format:string,
-    price:number
-  }
+  id: Number,
+  User: {
+    name: string
+  },
+  Track: {
+    artistName: string,
+    trackName: string,
+    coverURL: string
+  } | null,
+  Album: object | null,
+  price: Number,
+  forSale: boolean,
+  notes: string,
+  condition: string,
+  format: string,
+  dateAdded: string
+}
 
 export default function RenderTrack({listing}:Prop){
   
@@ -22,13 +30,13 @@ export default function RenderTrack({listing}:Prop){
     <article className="listing-article" key={listing.id}>
       <div className="recordImage">
         <img className="albumImage"
-          src={listing.coverURL} alt={listing.trackName}/>
+          src={listing.Track?.coverURL} alt={listing.Track?.trackName}/>
       </div>
         <div className="recordInfoDb">
-        <div className="artistCardTextInfo">Artist: {listing.artistName}</div>
-        <div className="artistCardTextInfo">Song: {listing.trackName}</div>       
+        <div className="artistCardTextInfo">Artist: {listing.Track?.artistName}</div>
+        <div className="artistCardTextInfo">Song: {listing.Track?.trackName}</div>       
         <div className="artistCardTextInfo">Condition: {listing.condition}</div>
-        <div className="artistCardTextInfo">Sold By: {listing.owner}</div>
+        <div className="artistCardTextInfo">Sold By: {listing.User.name}</div>
         <div className="artistCardTextInfo">Price: ${listing.price}</div>
       </div>
       <div className="recordCardButtons">
