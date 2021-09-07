@@ -1,5 +1,6 @@
 import create from "zustand";
 import {LATEST_LISTINGS} from "../components/dbURLS"
+import {REGISTER_NEW_USER} from "../components/dbURLS"
 
 // IMPORT DUMMY DATA UNTIL BACKEND IS COMPLETE
 import {dummyListings} from "../components/dummyData"
@@ -17,7 +18,8 @@ type Store = {
 };
 
 type newUserType = {
-   userName: string;
+  name: string,
+  userName: string;
   email: string;
   password: string;
 };

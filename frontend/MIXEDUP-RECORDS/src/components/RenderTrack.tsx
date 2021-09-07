@@ -24,16 +24,13 @@ type listing = {
   dateAdded: string
 }
 
-
-
-
 export default function RenderTrack({listing}:Prop){
   
   return<>
-    <article className="listing-article">
+    <article className="listing-article" key={listing.id}>
       <div className="recordImage">
         <img className="albumImage"
-          src={listing.Track?.coverURL} alt="Beanie Man Album"/>
+          src={listing.Track?.coverURL} alt={listing.Track?.trackName}/>
       </div>
         <div className="recordInfoDb">
         <div className="artistCardTextInfo">Artist: {listing.Track?.artistName}</div>

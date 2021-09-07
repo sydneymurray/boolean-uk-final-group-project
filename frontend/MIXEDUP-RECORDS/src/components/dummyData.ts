@@ -1,6 +1,7 @@
 // DUMMY DATA UNTIL BACKEND IS COMPLETE
 export let dummyListings = [
     {
+        id:1,
         artistName:"Blondie",
         trackName:"Dreaming",
         owner:"Joe Blogs",
@@ -10,6 +11,7 @@ export let dummyListings = [
         price:5.49
       },
       {
+        id:2,
         artistName:"Alphonse Mouzon",
         trackName:"Don't Want To Lose This Feeling",
         owner:"Greg Edwards",
@@ -19,6 +21,7 @@ export let dummyListings = [
         price:10.49
       },
       {
+        id:3,
         artistName:"The Heptones",
         trackName:"I Hold The Handle",
         owner:"Coxsone Dodd",
@@ -27,7 +30,8 @@ export let dummyListings = [
         format:"7 Inch",
         price:15.49
       },
-      {
+      { 
+        id:4,
         artistName:"Errol Dunkley",
         trackName:"Betcha By Golly Wow",
         owner:"Sydney",
