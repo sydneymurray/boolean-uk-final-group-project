@@ -12,11 +12,11 @@ generator client {
 }
 
 model User {
-  id          Int       @id @default(autoincrement())
-  name        String
-  username    String
-  email       String    @unique
-  password    String
+  id       Int        @id @default(autoincrement())
+  name     String
+  username String
+  email    String     @unique
+  password String
   Listings Listings[]
 }
 
@@ -43,19 +43,21 @@ model Listings {
   User      User     @relation(fields: [user], references: [id])
   track     Int
   Track     Track    @relation(fields: [track], references: [id])
-  price     Int
+  price     Float
   forSale   Boolean  @default(true)
   notes     String   @db.VarChar(255)
   condition String   @db.VarChar(255)
   format    Format   @default(MP3)
   dateAdded DateTime @default(now())
 
+  Album   Album? @relation(fields: [albumId], references: [id])
+  albumId Int?
 }
 
 model Album {
-  id Int @id @default(autoincrement())
-  artist String
+  id        Int        @id @default(autoincrement())
+  artist    String
   albumname String
-  coverURL String
-  Listings Listings[]
+  coverURL  String
+  Listings  Listings[]
 }

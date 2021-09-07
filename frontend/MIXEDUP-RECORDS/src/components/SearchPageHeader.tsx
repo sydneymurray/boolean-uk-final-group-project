@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useStore } from "../Hooks/Store";
 import { useHistory } from "react-router-dom";
 import "../styles/searchPageHeaderStyles.css";
+import { TOKEN_CHECK } from "./dbURLS";
 
 export default function SearchPageHeader() {
   const [userName, setUserName] = useState("")
@@ -9,7 +10,7 @@ export default function SearchPageHeader() {
   const history = useHistory();
 
   useEffect( () => {
-    fetch("http://localhost:3100/users/current", {
+    fetch(TOKEN_CHECK, {
       credentials: "include"
     })
     .then(res=>{

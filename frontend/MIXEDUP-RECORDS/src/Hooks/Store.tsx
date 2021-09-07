@@ -25,7 +25,7 @@ type newUserType = {
 };
 
 type Listing = {
-  id: Number,
+  id: number,
   User: {
     name: string
   },
@@ -35,7 +35,7 @@ type Listing = {
     coverURL: string
   } | null,
   Album: object | null,
-  price: Number,
+  price: number,
   forSale: boolean,
   notes: string,
   condition: string,
@@ -55,7 +55,7 @@ export const useStore = create<Store>((set, get) => ({
   filteredListings: null,
   setfilteredListings: (filteredListings:Listing[]) => {set((store) => ({filteredListings: filteredListings }))},
   retrieveListings: () => {
-    fetch("http://localhost:3100/listings")
+    fetch(LATEST_LISTINGS)
     .then(res=>res.json())
     .then((data:{
       data: Listing[]

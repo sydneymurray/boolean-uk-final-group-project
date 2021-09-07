@@ -1,7 +1,7 @@
 import { PrismaClient } from ".prisma/client"
 import { hash } from "bcrypt";
-
 import { users, tracks, listings } from "../src/utils/mockData"
+
 
 const prisma = new PrismaClient()
 
