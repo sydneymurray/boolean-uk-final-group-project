@@ -1,0 +1,41 @@
+.artistbttn,
+.albumbttn,
+.trackbttn {
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 7px;
+  width: 120px;
+  height: 40px;
+  font-family: "Abel", sans-serif;
+}
+
+.artistbttn:hover,
+.albumbttn:hover,
+.trackbttn:hover {
+  background-color: rgb(92, 121, 150);
+}
+
+.artistbttn:focus,
+.albumbttn:focus,
+.trackbttn:focus {
+  background-color: yellow;
+}
+
+.albumImage {
+  width: 150px;
+  padding: 20px;
+}
+
+.apiResults {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px);
+  grid-gap: 2ch;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 30px;
+  align-content: center;
+  background-color: rgb(92, 121, 150);
+  padding-top: 20px;
+  padding-left: 5%;
+}

@@ -1,28 +1,28 @@
-.listing-article{
+.listing-article {
   display: grid;
   margin:10px;
 }
 
 .singlerecordDb-card {
-    border: solid 1px red;
-    border-radius: 7px;
-  }
-  
-  .albumImage {
-    width: 100%;
-  }
-  
-  .recordBuyButtn,
-  .recordFavBttn {
-    display: block;
-    margin: 10px;
-  }
-  
-  .artistCardTextInfo {
-    font-size: 1.2rem;
-  }
-  
-  .recordInfoDb {
-    margin: 10px;
-  }
-  
+  border: solid 1px red;
+  border-radius: 7px;
+}
+
+.albumImage {
+  width: 100%;
+}
+
+.recordBuyButtn,
+.recordFavBttn {
+  display: block;
+  margin: 10px;
+}
+
+.artistCardTextInfo,
+.albumCardTextInfo {
+  font-size: 1.2rem;
+}
+
+.recordInfoDb {
+  margin: 10px;
+}
