@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-
 exports.listings = exports.tracks = exports.users = void 0;
-
 exports.users = [
     {
         "username": "holidayArmadilo",
@@ -29,7 +27,6 @@ exports.users = [
         "email": "ronnie@corbett.com"
     }
 ];
-
 exports.tracks = [
     {
         artistName: "Blondie",
@@ -39,7 +36,6 @@ exports.tracks = [
     {
         artistName: "Alphonse Mouzon",
         trackName: "Don't Want To Lose This Feeling",
-
         coverURL: "https://images-na.ssl-images-amazon.com/images/I/41kTf4lKDJL.jpg",
     },
     {

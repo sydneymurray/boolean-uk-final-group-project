@@ -6,7 +6,7 @@ type Prop = {
 }
 
 type listing = {
-  id: Number,
+  id: number,
   User: {
     name: string
   },
@@ -16,7 +16,7 @@ type listing = {
     coverURL: string
   } | null,
   Album: object | null,
-  price: Number,
+  price: number,
   forSale: boolean,
   notes: string,
   condition: string,
