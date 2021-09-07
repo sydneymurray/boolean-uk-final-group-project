@@ -43,7 +43,7 @@ model Listings {
   User      User     @relation(fields: [user], references: [id])
   track     Int
   Track     Track    @relation(fields: [track], references: [id])
-  price     Int
+  price     Float
   forSale   Boolean  @default(true)
   notes     String   @db.VarChar(255)
   condition String   @db.VarChar(255)

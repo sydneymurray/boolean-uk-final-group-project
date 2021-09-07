@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { User } from "prisma/prisma-client";
+import { User } from "@prisma/client";
 import dbClient from "../../utils/client";
 
 export const getCurrentUser = async (req: Request, res: Response) => {
