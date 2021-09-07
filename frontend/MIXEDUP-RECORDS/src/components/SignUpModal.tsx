@@ -1,19 +1,50 @@
-import React from "react";
-import "../components/modalStyling.css";
+import React, { SyntheticEvent } from "react";
+import registerUser from "./registerUser"
+import "../styles/modalStyling.css";
+import { useStore } from "../Hooks/Store";
+
+
 
 export default function ModalPopUp() {
+  const setModal = useStore((store) => store.setModal);
+  //const setUser = useStore((store) => store.setUser);
+  
+  function registerNewUser(event: SyntheticEvent){
+    event.preventDefault();
+    let newUser = {
+      name: document.querySelector('.newUsersName')?.value,
+      username: document.querySelector('.newUsername')?.value,
+      email: document.querySelector('.newUsersEmail')?.value,
+      password: document.querySelector('.newUserPassword')?.value
+    }
+    
+    registerUser(newUser).then(data => {
+      setModal("")
+      alert("Login username "+data.user.username+" succesfully created "+data.user.id)
+    })
+  }
+
   return (
-    <div className="modal-bg">
+    <form onSubmit={registerNewUser} className="modal-bg">
       <div className="modal">
         <h1>Sign up</h1>
         <label htmlFor="name">Name: </label>
-        <input type="text" name="name" />
+        <input className="newUsersName" type="text" name="name" required />
+
+        <label htmlFor="name">User Name: </label>
+        <input className="newUsername" type="text" name="name" required />
+
         <label htmlFor="name">Email: </label>
-        <input type="email" name="email" />
+        <input className="newUsersEmail" type="email" name="email" required />
         <label htmlFor="password">Password: </label>
-        <input type="password" name="password" />
-        <button>Join</button>
+        <input className="newUserPassword" type="password" name="password" required/>
+
+        <button type="submit" className="modalJoinButton">Join</button>
+
+        <span className="modalClose" onClick={() => {setModal("")}}>
+          ❎
+        </span>
       </div>
-    </div>
+    </form>
   );
 }

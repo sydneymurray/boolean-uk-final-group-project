@@ -1,22 +1,23 @@
-import user from "./service"
 import { Request, Response } from "express"
-import { createToken } from "../../utils/JWTGenerator"
+import { User } from "prisma/prisma-client";
+import dbClient from "../../utils/client";
 
-export const getOneUser = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id)
+export const getCurrentUser = async (req: Request, res: Response) => {
+    const authDetails = req.currentUser as User
 
-    const currentUser = await user.findUnique({
-        where: { id }
-    })
-
-    res.json({ data: currentUser })
-}
-
-export const createUser = async (req: Request, res: Response) => {
-    const newUser = req.body
-    const savedUser = await user.create({ data: newUser })
-
-    const token = createToken({ id: savedUser.id, username: savedUser.username })
-    res.cookie("token", token, { httpOnly: true })
-    res.json({ user: { id: savedUser.id, username: savedUser.username }})
+    try {
+        const currentUser = await dbClient.user.findUnique({
+            where: { id: Number(authDetails.id) },
+            select: {
+                id: true,
+                name: true,
+                username: true,
+                email:true
+            }
+        })
+    
+        res.json({ data: currentUser })
+    } catch (error) {
+        res.status(401).json({ msg: "You don't seem to be logged in???" })
+    }
 }
