@@ -19,6 +19,8 @@ model User {
   password   String
   Listings   Listings[]
   Favourites Favourites[]
+  previous_owner  Transaction_Table[] @relation("previous owner")
+  new_owner  Transaction_Table[]  @relation("new owner")
 }
 
 model Track {
@@ -36,6 +38,7 @@ enum Format {
   VINAL7
   VINAL10
   VINAL12
+  ALBUM
 }
 
 model Listings {
@@ -50,7 +53,7 @@ model Listings {
   condition String   @db.VarChar(255)
   format    Format   @default(MP3)
   dateAdded DateTime @default(now())
-
+  Transaction Transaction_Table[]
   Album      Album?       @relation(fields: [albumId], references: [id])
   albumId    Int?
   Favourites Favourites[]
@@ -71,3 +74,14 @@ model Favourites {
   listing  Int
   Listings Listings @relation(fields: [listing], references: [id])
 }
+
+model Transaction_Table {
+  id        Int        @id @default(autoincrement())
+  previous_ownerId  Int
+  new_ownerId Int
+  listing   Int
+  Listing   Listings   @relation(fields: [listing], references: [id])
+  previous_owner  User  @relation("previous owner", fields: [previous_ownerId], references: [id])
+  new_owner       User  @relation("new owner", fields: [previous_ownerId], references: [id])
+}
+
