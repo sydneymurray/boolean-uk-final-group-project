@@ -18,7 +18,6 @@ export default function RenderApiListing({ apiListing }: Prop) {
 
   function buyButtonClicked(apiListing: ApiListing) {
     setModal("sellItem", apiListing);
-    console.log("buy button clicked");
   }
 
   return (
@@ -40,7 +39,7 @@ export default function RenderApiListing({ apiListing }: Prop) {
             Track: {apiListing.trackName}
           </div>
 
-          <div className="albumCardTextInfo">Album: {apiListing.trackName}</div>
+          <div className="albumCardTextInfo">Album: {apiListing.albumName}</div>
         </div>
         <div className="recordCardButtons">
           <button

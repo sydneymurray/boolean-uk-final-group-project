@@ -14,7 +14,6 @@ export default function Sell() {
   let apiListing = searchResults;
 
   const handleSelect = (e: any) => {
-    console.log(e);
     setSearchcriteria(e.target.value);
   };
   type RawSearchResults =
@@ -44,6 +43,47 @@ export default function Sell() {
         const fetchResults = JSON.parse(data.contents);
         if (fetchResults.total) {
           setSearchResults(JSON.parse(data.contents));
+          // console.log(
+          //   "normal deezer API fetch results",
+          //   JSON.parse(data.contents)
+          // );
+        } else {
+          setSearchResults("Can't find what you looking for");
+        }
+      })
+      .catch((error) => console.error("FETCH ERROR:", error));
+  }
+
+  // new function to get jsut album
+
+  function getAlbumResults() {
+    fetch(
+      `https://api.allorigins.win/get?url=${encodeURIComponent(
+        `https://api.deezer.com/search?q=${searchcriteria}:"${search}"`
+      )}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const fetchResults = JSON.parse(data.contents);
+        fetchResults.albumData = [];
+        for (const item of fetchResults.data) {
+          const albumObject = {
+            ...item.album,
+            artistName: item.artist.name,
+          };
+          if (
+            !fetchResults.albumData
+              .map((albumObject: { title: string }) => albumObject.title)
+              .includes(item.album.title)
+          ) {
+            fetchResults.albumData = [...fetchResults.albumData, albumObject];
+          }
+        }
+
+        console.log("here are the modified results", fetchResults);
+
+        if (fetchResults.total) {
+          setSearchResults(JSON.parse(data.contents));
           console.log(JSON.parse(data.contents));
         } else {
           setSearchResults("Can't find what you looking for");
@@ -51,6 +91,11 @@ export default function Sell() {
       })
       .catch((error) => console.error("FETCH ERROR:", error));
   }
+
+  // we need from api:
+  // album.cover_medium
+  // album.title
+  // artist.name
 
   //getting next 25 results
 
@@ -87,7 +132,7 @@ export default function Sell() {
           onChange={(e) => setSearch(e.target.value)}
         ></input>
 
-        <button onClick={() => getResults()}>SEARCH</button>
+        <button onClick={() => getAlbumResults()}>SEARCH</button>
       </article>
       <div className="apiResults">
         {typeof apiListing === "object" && apiListing.data ? (
