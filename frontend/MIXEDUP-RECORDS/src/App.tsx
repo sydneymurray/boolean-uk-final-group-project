@@ -15,9 +15,11 @@ import {useStore} from "./Hooks/Store"
 
 function App() {
   let retrieveListings = useStore(store=>store.retrieveListings)
-  
+  let retrieveFavourites = useStore(store=>store.retrieveFavourites)
+
   useEffect(()=>{
     retrieveListings()
+    retrieveFavourites()
   },[])
 
   return (
