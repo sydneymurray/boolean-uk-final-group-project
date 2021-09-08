@@ -43,7 +43,7 @@ export default function LatestUploads() {
 
   useEffect(() => {
     filterListings("");
-  }, []);
+  }, [listings]);
 
   if (!filteredListings) return <></>;
 
@@ -58,8 +58,8 @@ export default function LatestUploads() {
         ></input>
       </div>
       <div className="results-container">
-        {filteredListings.map((listing) => (
-          <RenderTrack listing={listing} />
+        {filteredListings.map((listing, index) => (
+          <RenderTrack key={index} listing={listing} />
         ))}
       </div>
     </>
