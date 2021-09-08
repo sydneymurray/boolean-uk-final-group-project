@@ -12,12 +12,13 @@ generator client {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  name     String
-  username String
-  email    String     @unique
-  password String
-  Listings Listings[]
+  id         Int          @id @default(autoincrement())
+  name       String
+  username   String
+  email      String       @unique
+  password   String
+  Listings   Listings[]
+  Favourites Favourites[]
 }
 
 model Track {
@@ -50,8 +51,9 @@ model Listings {
   format    Format   @default(MP3)
   dateAdded DateTime @default(now())
 
-  Album   Album? @relation(fields: [albumId], references: [id])
-  albumId Int?
+  Album      Album?       @relation(fields: [albumId], references: [id])
+  albumId    Int?
+  Favourites Favourites[]
 }
 
 model Album {
@@ -60,4 +62,12 @@ model Album {
   albumname String
   coverURL  String
   Listings  Listings[]
+}
+
+model Favourites {
+  id       Int      @id @default(autoincrement())
+  user     Int
+  User     User     @relation(fields: [user], references: [id])
+  listing  Int
+  Listings Listings @relation(fields: [listing], references: [id])
 }

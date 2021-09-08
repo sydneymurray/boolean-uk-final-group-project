@@ -8,6 +8,7 @@ import cors from "cors"
 import authRouter from "./resources/Auth/routes"
 import { validateToken } from "./utils/JWTGenerator"
 import { JwtPayload } from 'jsonwebtoken';
+import favouritesRouter from "./resources/favourites/routes"
 
 config()
 
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
   }
 })
 
+app.use("/favourites", favouritesRouter)
 app.use('/users', userRouter);
 // catch 404 and forward to error handler
 app.all("*",(req ,res)=> {
