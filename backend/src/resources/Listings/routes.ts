@@ -1,7 +1,8 @@
 import { Router } from "express";
-import {  } from "./controller";
+import { createOneListing } from "./controller";
 
-const listingRouter = Router()
+const listingRouter = Router();
 
+listingRouter.post("/", createOneListing);
 
-export default listingRouter 
+export default listingRouter;

@@ -19,6 +19,8 @@ type Store = {
   setUser: (newUser: newUserType) => void;
   favourites: {}[] | null;
   retrieveFavourites: () => void;
+  searchcriteria: string;
+  setSearchcriteria: (criteria: string) => void;
 };
 
 type newUserType = {
@@ -85,5 +87,9 @@ export const useStore = create<Store>((set, get) => ({
       .then((data: { data: {}[] }) => {
         set((store) => ({ favourites: data.data }));
       });
+  },
+  searchcriteria: "",
+  setSearchcriteria: (criteria: string) => {
+    set((store) => ({ searchcriteria: criteria }));
   },
 }));

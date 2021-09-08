@@ -45,8 +45,8 @@ model Listings {
   id        Int      @id @default(autoincrement())
   user      Int
   User      User     @relation(fields: [user], references: [id])
-  track     Int
-  Track     Track    @relation(fields: [track], references: [id])
+  track     Int?
+  Track     Track?    @relation(fields: [track], references: [id])
   price     Float
   forSale   Boolean  @default(true)
   notes     String   @db.VarChar(255)

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import RenderApiListing from "../components/RenderApiListing";
+import { useStore } from "../Hooks/Store";
 
 import "../styles/sellPageStyles.css";
 
 export default function Sell() {
   const [search, setSearch] = useState("");
-  const [searchcriteria, setSearchcriteria] = useState("artist");
-  const [searchResults, setSearchResults] = useState<RawSearchResults>({
-    data: null,
-    total: null,
-    next: null,
-  });
-
+  const [searchResults, setSearchResults] = useState<RawSearchResults>(
+    "Search above for results"
+  );
+  const searchcriteria = useStore((store) => store.searchcriteria);
+  const setSearchcriteria = useStore((store) => store.setSearchcriteria);
   let apiListing = searchResults;
 
   const handleSelect = (e: any) => {
