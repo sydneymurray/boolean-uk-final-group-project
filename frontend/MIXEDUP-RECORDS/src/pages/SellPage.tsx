@@ -13,17 +13,18 @@ export default function Sell() {
   });
 
   let apiListing = searchResults;
-  console.log("searchApiResults", apiListing);
 
   const handleSelect = (e: any) => {
     console.log(e);
     setSearchcriteria(e.target.value);
   };
-  type RawSearchResults = {
-    data: SearchResults[] | null;
-    total: Number | null;
-    next: string | null;
-  };
+  type RawSearchResults =
+    | {
+        data: SearchResults[] | null;
+        total: Number | null;
+        next: string | null;
+      }
+    | string;
 
   type SearchResults = {
     artist: { name: string };
@@ -40,8 +41,33 @@ export default function Sell() {
       )}`
     )
       .then((res) => res.json())
-      .then((data) => setSearchResults(JSON.parse(data.contents)))
+      .then((data) => {
+        const fetchResults = JSON.parse(data.contents);
+        if (fetchResults.total) {
+          setSearchResults(JSON.parse(data.contents));
+          console.log(JSON.parse(data.contents));
+        } else {
+          setSearchResults("Can't find what you looking for");
+        }
+      })
       .catch((error) => console.error("FETCH ERROR:", error));
+  }
+
+  //getting next 25 results
+
+  function getNextResults() {
+    if (typeof apiListing === "object" && apiListing.next) {
+      fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(
+          apiListing.next
+        )}`
+      )
+        .then((res) => res.json())
+        .then((data) => setSearchResults(JSON.parse(data.contents)))
+        .catch((error) => console.error("FETCH ERROR:", error));
+    } else {
+      return "No more results";
+    }
   }
 
   return (
@@ -65,8 +91,13 @@ export default function Sell() {
         <button onClick={() => getResults()}>SEARCH</button>
       </article>
       <div className="apiResults">
-        {apiListing.data
-          ? apiListing.data.map((apiListing) => (
+        {typeof apiListing === "object" && apiListing.data ? (
+          apiListing.data.map(
+            (apiListing: {
+              artist: { name: any };
+              title: any;
+              album: { title: any; cover_medium: any };
+            }) => (
               <RenderApiListing
                 apiListing={{
                   artistName: apiListing.artist.name,
@@ -75,10 +106,13 @@ export default function Sell() {
                   coverURL: apiListing.album.cover_medium,
                 }}
               />
-            ))
-          : null}
+            )
+          )
+        ) : (
+          <h1>{searchResults}</h1>
+        )}
       </div>
-      <button>Next 25 results</button>
+      <button onClick={() => getNextResults()}>Next 25 results</button>
     </>
   );
 }
