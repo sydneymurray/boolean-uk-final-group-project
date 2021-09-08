@@ -54,9 +54,7 @@ const getAllListings = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 format: true,
                 User: {
                     select: {
-                        name: true,
                         username: true,
-                        email: true
                     }
                 },
                 Track: {

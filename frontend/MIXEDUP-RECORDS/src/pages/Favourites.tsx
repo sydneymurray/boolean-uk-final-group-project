@@ -1,5 +1,8 @@
 import React from "react";
 
 export default function Favourites() {
-  return <h1>favourites goes here</h1>;
+  return <>
+    <h1 className="favourites-heading">My Favourites</h1>
+      
+  </>
 }

@@ -12,12 +12,15 @@ generator client {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  name     String
-  username String
-  email    String     @unique
-  password String
-  Listings Listings[]
+  id         Int          @id @default(autoincrement())
+  name       String
+  username   String
+  email      String       @unique
+  password   String
+  Listings   Listings[]
+  Favourites Favourites[]
+  previous_owner  Transaction_Table[] @relation("previous owner")
+  new_owner  Transaction_Table[]  @relation("new owner")
 }
 
 model Track {
@@ -35,6 +38,7 @@ enum Format {
   VINAL7
   VINAL10
   VINAL12
+  ALBUM
 }
 
 model Listings {
@@ -49,9 +53,10 @@ model Listings {
   condition String   @db.VarChar(255)
   format    Format   @default(MP3)
   dateAdded DateTime @default(now())
-
-  Album   Album? @relation(fields: [albumId], references: [id])
-  albumId Int?
+  Transaction Transaction_Table[]
+  Album      Album?       @relation(fields: [albumId], references: [id])
+  albumId    Int?
+  Favourites Favourites[]
 }
 
 model Album {
@@ -61,3 +66,22 @@ model Album {
   coverURL  String
   Listings  Listings[]
 }
+
+model Favourites {
+  id       Int      @id @default(autoincrement())
+  user     Int
+  User     User     @relation(fields: [user], references: [id])
+  listing  Int
+  Listings Listings @relation(fields: [listing], references: [id])
+}
+
+model Transaction_Table {
+  id        Int        @id @default(autoincrement())
+  previous_ownerId  Int
+  new_ownerId Int
+  listing   Int
+  Listing   Listings   @relation(fields: [listing], references: [id])
+  previous_owner  User  @relation("previous owner", fields: [previous_ownerId], references: [id])
+  new_owner       User  @relation("new owner", fields: [previous_ownerId], references: [id])
+}
+

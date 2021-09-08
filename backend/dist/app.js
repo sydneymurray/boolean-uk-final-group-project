@@ -11,6 +11,7 @@ const routes_1 = __importDefault(require("./resources/User/routes"));
 const cors_1 = __importDefault(require("cors"));
 const routes_2 = __importDefault(require("./resources/Auth/routes"));
 const JWTGenerator_1 = require("./utils/JWTGenerator");
+const routes_3 = __importDefault(require("./resources/favourites/routes"));
 (0, dotenv_1.config)();
 var app = (0, express_1.default)();
 // view engine setup
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
         res.status(401).json({ err: "You are not logged in" });
     }
 });
+app.use("/favourites", routes_3.default);
 app.use('/users', routes_1.default);
 // catch 404 and forward to error handler
 app.all("*", (req, res) => {
