@@ -11,9 +11,9 @@ type Store = {
   modal: string;
   modalData: ModalData | undefined;
   setModal: (modalName: string, modalData?: ModalData) => void;
-  listings: Listing[] | null;
-  filteredListings: Listing[] | null;
-  setfilteredListings: (filteredListings: Listing[]) => void;
+  listings: listing[] | null;
+  filteredListings: listing[] | null;
+  setfilteredListings: (filteredListings: listing[]) => void;
   retrieveListings: () => void;
   newUser: newUserType | null;
   setUser: (newUser: newUserType) => void;
@@ -30,17 +30,21 @@ type newUserType = {
   password: string;
 };
 
-type Listing = {
+type listing = {
   id: number;
   User: {
-    name: string;
+    username: string;
   };
   Track: {
     artistName: string;
     trackName: string;
     coverURL: string;
   } | null;
-  Album: object | null;
+  Album: {
+    artist: string,
+    albumname: string,
+    coverURL: string
+  } | null;
   price: number;
   forSale: boolean;
   notes: string;
@@ -65,13 +69,13 @@ export const useStore = create<Store>((set, get) => ({
 
   listings: null,
   filteredListings: null,
-  setfilteredListings: (filteredListings: Listing[]) => {
+  setfilteredListings: (filteredListings: listing[]) => {
     set((store) => ({ filteredListings: filteredListings }));
   },
   retrieveListings: () => {
     fetch(LATEST_LISTINGS)
       .then((res) => res.json())
-      .then((data: { data: Listing[] }) => {
+      .then((data: { data: listing[] }) => {
         set((store) => ({ listings: data.data }));
       });
   },

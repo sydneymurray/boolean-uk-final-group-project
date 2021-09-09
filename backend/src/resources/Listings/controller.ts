@@ -6,9 +6,6 @@ export async function createOneListing(req: Request, res: Response) {
   const listingDetails = req.body;
   const currentUser = req.currentUser as User;
 
-  console.log(listingDetails);
-  console.log(currentUser);
-
   if (listingDetails.albumId) {
     try {
       const newListing = await dbClient.listings.create({

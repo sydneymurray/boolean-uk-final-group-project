@@ -54,7 +54,12 @@ export default function SellItemModal() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(listingInfo),
-          });
+          })
+          .then((res) => {
+            if (res.ok) {
+              setModal("newListing")
+            }else setModal("listingFailed")
+          })
         });
     } else {
       const trackDetails = {
@@ -89,8 +94,11 @@ export default function SellItemModal() {
             },
             body: JSON.stringify(listingInfo),
           })
-            .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((res) => {
+              if (res.ok) {
+                setModal("newListing")
+              }else setModal("listingFailed")
+            })
         });
     }
   }

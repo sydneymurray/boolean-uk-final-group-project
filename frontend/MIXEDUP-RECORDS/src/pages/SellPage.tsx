@@ -16,8 +16,8 @@ export default function Sell() {
   const handleSelect = (e: any) => {
     setSearchcriteria(e.target.value);
   };
-  type RawSearchResults =
-    | {
+  type RawSearchResults = {
+        albumData: AlbumResults[] | null
         data: SearchResults[] | null;
         total: Number | null;
         next: string | null;
@@ -29,6 +29,17 @@ export default function Sell() {
     title: string;
     album: { cover_medium: string; title: string };
   };
+
+  type AlbumResults = {
+    artistName: string,
+    cover: string,
+    cover_big: string,
+    cover_medium: string,
+    cover_small: string,
+    cover_xl: string,
+    title: string,
+    tracklist: string
+  }
 
   // i need to add a if statement in below to catch errors if the info is not in the api
 
@@ -71,11 +82,9 @@ export default function Sell() {
             ...item.album,
             artistName: item.artist.name,
           };
-          if (
-            !fetchResults.albumData
-              .map((albumObject: { title: string }) => albumObject.title)
-              .includes(item.album.title)
-          ) {
+          const albumTitleArray = fetchResults.albumData
+          .map((albumObject: { title: string }) => albumObject.title)
+          if (!albumTitleArray.includes(item.album.title)) {
             fetchResults.albumData = [...fetchResults.albumData, albumObject];
           }
         }
@@ -83,8 +92,7 @@ export default function Sell() {
         console.log("here are the modified results", fetchResults);
 
         if (fetchResults.total) {
-          setSearchResults(JSON.parse(data.contents));
-          console.log(JSON.parse(data.contents));
+          setSearchResults(fetchResults);
         } else {
           setSearchResults("Can't find what you looking for");
         }

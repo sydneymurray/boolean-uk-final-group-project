@@ -18,8 +18,6 @@ function createOneListing(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const listingDetails = req.body;
         const currentUser = req.currentUser;
-        console.log(listingDetails);
-        console.log(currentUser);
         if (listingDetails.albumId) {
             try {
                 const newListing = yield client_1.default.listings.create({

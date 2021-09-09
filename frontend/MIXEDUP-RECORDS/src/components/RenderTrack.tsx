@@ -15,7 +15,11 @@ type listing = {
     trackName: string;
     coverURL: string;
   } | null;
-  Album: object | null;
+  Album: {
+    artist: string,
+    albumname: string,
+    coverURL: string
+  } | null;
   price: number;
   forSale: boolean;
   notes: string;
@@ -31,16 +35,16 @@ export default function RenderTrack({ listing }: Prop) {
         <div className="recordImage">
           <img
             className="albumImage"
-            src={listing.Track?.coverURL}
-            alt={listing.Track?.trackName}
+            src={listing.Track?.coverURL || listing.Album?.coverURL}
+            alt={listing.Track?.trackName || listing.Album?.albumname}
           />
         </div>
         <div className="recordInfoDb">
           <div className="artistCardTextInfo">
-            Artist: {listing.Track?.artistName}
+            Artist: {listing.Track?.artistName || listing.Album?.artist}
           </div>
           <div className="artistCardTextInfo">
-            Song: {listing.Track?.trackName}
+            {listing.Track ? `Song: ${listing.Track?.trackName}` : `Album: ${listing.Album?.albumname}`}
           </div>
           <div className="artistCardTextInfo">
             Condition: {listing.condition}

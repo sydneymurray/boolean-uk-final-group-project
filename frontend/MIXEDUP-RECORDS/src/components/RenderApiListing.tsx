@@ -39,7 +39,7 @@ export default function RenderApiListing({ apiListing }: Prop) {
             Track: {apiListing.trackName}
           </div>
 
-          <div className="albumCardTextInfo">Album: {apiListing.albumName}</div>
+          <div className="albumCardTextInfo">Album/EP: {apiListing.albumName}</div>
         </div>
         <div className="recordCardButtons">
           <button
