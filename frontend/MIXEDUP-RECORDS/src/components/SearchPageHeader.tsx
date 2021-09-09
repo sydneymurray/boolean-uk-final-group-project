@@ -5,32 +5,38 @@ import "../styles/searchPageHeaderStyles.css";
 import { TOKEN_CHECK } from "./dbURLS";
 
 export default function SearchPageHeader() {
-  const [userName, setUserName] = useState("")
+  const [userName, setUserName] = useState("");
 
   const history = useHistory();
 
-  useEffect( () => {
+  useEffect(() => {
     fetch(TOKEN_CHECK, {
-      credentials: "include"
+      credentials: "include",
     })
-    .then(res=>{
-      if (!res.ok) history.push("/")
-      else return res.json()
-    })
-    .then(data=>setUserName(data.data.name))
-    .catch((Error)=>{
-      console.error(Error);
-    }) 
-  }, [])
+      .then((res) => {
+        if (!res.ok) history.push("/");
+        else return res.json();
+      })
+      .then((data) => setUserName(data.data.name))
+      .catch((Error) => {
+        console.error(Error);
+      });
+  }, []);
 
   return (
-    <header className="headerStyling">
-      <img
-        className="logo"
-        src="../../Public/images/Mixedup-logo.png"
-        alt="mixed up logo"
-      />
-      <p>{`Logged in as ${userName}`}</p>
+    <header className="headerStyling-Main">
+      <div>
+        <img
+          className="logo"
+          src="../../Public/images/Mixedup-logo.png"
+          alt="mixed up logo"
+        />
+        <p className="loggedInUser">Logged in as: </p>
+        <p className="loggedInUserName"> {`${userName}`}</p>
+      </div>
+
+      <h1 className="strapLine">Mixed Up Reords > Buy . Sell . Vinyl</h1>
+
       <button
         className="backButton"
         onClick={() => {
@@ -39,6 +45,7 @@ export default function SearchPageHeader() {
       >
         Back to Search
       </button>
+
       <button
         className="favouriteButton"
         onClick={() => {
@@ -65,7 +72,7 @@ export default function SearchPageHeader() {
         My Transactions
       </button>
 
-      <button className="logOutButton">Log Out</button>
+      <button className="logOutButton">Log Out </button>
     </header>
   );
 }

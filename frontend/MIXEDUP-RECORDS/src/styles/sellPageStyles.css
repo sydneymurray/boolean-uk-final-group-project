@@ -35,7 +35,20 @@
   margin-right: 10%;
   margin-top: 30px;
   align-content: center;
-  background-color: rgb(92, 121, 150);
+  /* background-color: rgb(92, 121, 150); */
   padding-top: 20px;
   padding-left: 5%;
+}
+
+.searchCopy {
+  display: inline-block;
+  grid-area: search-heading;
+}
+
+.searchInput {
+  font-family: "Abel", sans-serif;
+}
+
+.searchSellBar {
+  margin-left: 90px;
 }

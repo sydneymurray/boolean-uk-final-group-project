@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: "Abel", sans-serif;
   font-size: 1.5rem;
+  background-color: rgb(126, 163, 194);
 }
 
 code {

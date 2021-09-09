@@ -1,3 +1,48 @@
+.headerStyling-Main {
+  display: grid;
+  grid-template:
+    " logo strapLine strapLine strapLine strapLine strapLine" 130px
+    " logo backButton favouriteButton sellButton transactionButton logOutButton" 80px /
+    1fr 1fr 1fr 1fr 1fr 1fr;
+  /* grid-auto-flow: column; */
+  background-color: rgb(111, 180, 180);
+
+  padding: 50px;
+}
+
+/* grid-template:
+". search-heading . search-input ." auto/
+2fr auto 1fr 4fr 2fr; */
+
+.strapLine {
+  grid-area: strapLine;
+  font-family: "Big Shoulders Stencil Text", cursive;
+  margin-left: 170px;
+  font-size: 50px;
+  /* color: rgb(111, 180, 180); */
+  /* text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgb(255, 255, 255); */
+}
+
+.backButton {
+  grid-area: backButton;
+}
+
+.favouriteButton {
+  grid-area: favouriteButton;
+}
+
+.sellButton {
+  grid-area: sellButton;
+}
+
+.transactionButton {
+  grid-area: transactionButton;
+}
+
+.logOutButton {
+  grid-area: logOutButton;
+}
+
 .favouriteButton,
 .backButton,
 .sellButton,
@@ -10,6 +55,8 @@
   width: 120px;
   height: 40px;
   font-family: "Abel", sans-serif;
+  background-color: rgba(255, 255, 255, 0.609);
+  align-self: flex-end;
 }
 
 .favouriteButton:hover,
@@ -28,5 +75,17 @@
 }
 
 .logo {
-  width: 250px;
+  width: 150px;
+  grid-area: logo;
+}
+
+.loggedInUser {
+  font-size: 15px;
+  margin: 0 0 0 35px;
+}
+
+.loggedInUserName {
+  font-size: 15px;
+  margin: 0 0 0 35px;
+  font-weight: bolder;
 }
