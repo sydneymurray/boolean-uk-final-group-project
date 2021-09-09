@@ -5,7 +5,7 @@ import {deleteOne} from "./controller"
 const favouritesRouter = Router()
 
 favouritesRouter.get("/", retrieveAll)
-favouritesRouter.post("/", createOne)
-favouritesRouter.post("/:id", deleteOne)
+favouritesRouter.post("/:id", createOne)
+favouritesRouter.delete("/:id", deleteOne)
 
 export default favouritesRouter 

@@ -6,6 +6,6 @@ const controller_2 = require("./controller");
 const controller_3 = require("./controller");
 const favouritesRouter = (0, express_1.Router)();
 favouritesRouter.get("/", controller_1.retrieveAll);
-favouritesRouter.post("/", controller_2.createOne);
-favouritesRouter.post("/:id", controller_3.deleteOne);
+favouritesRouter.post("/:id", controller_2.createOne);
+favouritesRouter.delete("/:id", controller_3.deleteOne);
 exports.default = favouritesRouter;

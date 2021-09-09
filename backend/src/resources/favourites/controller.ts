@@ -5,16 +5,16 @@ import dbClient from "../../utils/client";
 
 export function createOne(req: Request, res: Response){
     let authDetails = req.currentUser as User
-    try{
         dbClient.favourites.create({data:{
             user: Number(authDetails.id),
-            listing: Number(req.body.listing)
+            listing: Number(req.params.id)
         }})
         .then(dbResponse => res.json(dbResponse))
-    }
-    catch (error) {
-        res.status(500).json({ msg: "Data was not saved due to a problem" })
-    }
+        .catch (dbResponse =>
+            res.status(500).json({ 
+                msg: "Data was not saved due to a problem",
+                error: dbResponse
+            }))
 }
 
 export function retrieveAll(req: Request, res: Response){
