@@ -12,18 +12,21 @@ export default function ModalPopUp() {
   function registerNewUser(event: SyntheticEvent){
     event.preventDefault();
     const {
-      newUsersName: name,
-      newUsername: username,
-      newUsersEmail: email,
-      newUserPassword: password,
+      formalName: name,
+      username: username,
+      email: email,
+      password: password,
     } = event.target as HTMLFormElement
 
     const newUser = {
-      name: name,
-      username: username,
-      email: email,
-      password: password
+      name: name.value,
+      username: username.value,
+      email: email.value,
+      password: password.value
     }
+
+    console.log(newUser);
+    
     
     registerUser(newUser).then(data => {
       setModal("")
@@ -36,10 +39,10 @@ export default function ModalPopUp() {
       <div className="modal">
         <h1>Sign up</h1>
         <label htmlFor="name">Name: </label>
-        <input className="newUsersName" type="text" name="name" required />
+        <input className="newUsersName" type="text" name="formalName" required />
 
         <label htmlFor="name">User Name: </label>
-        <input className="newUsername" type="text" name="name" required />
+        <input className="newUsername" type="text" name="username" required />
 
         <label htmlFor="name">Email: </label>
         <input className="newUsersEmail" type="email" name="email" required />

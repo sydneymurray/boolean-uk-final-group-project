@@ -16,7 +16,8 @@ model User {
   password          String
   Favourites        Favourites[]
   Listings          Listings[]
-  Transaction_Table Transaction_Table[]
+  previous_owner  Transaction_Table[] @relation("previous owner")
+  new_owner  Transaction_Table[]  @relation("new owner")
 }
 
 model Track {
@@ -61,15 +62,6 @@ model Favourites {
   User     User     @relation(fields: [user], references: [id], onDelete: Cascade)
 }
 
-model Transaction_Table {
-  id               Int      @id @default(autoincrement())
-  previous_ownerId Int
-  new_ownerId      Int
-  listing          Int
-  Listings         Listings @relation(fields: [listing], references: [id], onDelete: Cascade)
-  User             User     @relation(fields: [previous_ownerId], references: [id], onDelete: Cascade)
-}
-
 enum Format {
   DUBPLATE
   MP3
@@ -86,7 +78,7 @@ model Transaction_Table {
   new_ownerId Int
   listing   Int
   Listing   Listings   @relation(fields: [listing], references: [id])
-  previous_owner  User  @relation("previous owner", fields: [previous_ownerId], references: [id])
-  new_owner       User  @relation("new owner", fields: [previous_ownerId], references: [id])
+  previous_owner  User  @relation("previous owner", fields: [previous_ownerId], references: [id], onDelete: Cascade)
+  new_owner       User  @relation("new owner", fields: [previous_ownerId], references: [id], onDelete: Cascade)
 }
 
