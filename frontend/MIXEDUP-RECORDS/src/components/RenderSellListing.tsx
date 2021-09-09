@@ -13,13 +13,7 @@ export type ApiListing = {
   coverURL: string;
 };
 
-export default function RenderApiListing({ apiListing }: Prop) {
-  const setModal = useStore((store) => store.setModal);
-
-  function buyButtonClicked(apiListing: ApiListing) {
-    setModal("sellItem", apiListing);
-  }
-
+export default function RenderSellListing({ apiListing }: Prop) {
   return (
     <>
       <article className="listing-article">
@@ -39,28 +33,9 @@ export default function RenderApiListing({ apiListing }: Prop) {
             Track: {apiListing.trackName}
           </div>
 
-          <div className="albumCardTextInfo">Album/EP: {apiListing.albumName}</div>
-        </div>
-        <div className="recordCardButtons">
-          <button
-            className="recordBuyButtn"
-            onClick={() => {
-              buyButtonClicked(apiListing);
-            }}
-          >
-            Sell this item
-          </button>
+          <div className="albumCardTextInfo">Album: {apiListing.trackName}</div>
         </div>
       </article>
     </>
   );
 }
-
-// type Prop = {
-//   apiListing: {
-//     artistName: string;
-//     trackName: string;
-//     albumName: string;
-//     coverURL: string;
-//   };
-// };

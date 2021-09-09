@@ -3,30 +3,33 @@ import "../styles/RenderTrack.css"
 import { useStore } from "../Hooks/Store";
 
 type Prop = {
-  listing : listing
-}
+  listing: listing;
+};
 
 type listing = {
-  id: number,
+  id: number;
   User: {
-    name: string
-  },
+    username: string;
+  };
   Track: {
-    artistName: string,
-    trackName: string,
+    artistName: string;
+    trackName: string;
+    coverURL: string;
+  } | null;
+  Album: {
+    artist: string,
+    albumname: string,
     coverURL: string
-  } | null,
-  Album: object | null,
-  price: number,
-  forSale: boolean,
-  notes: string,
-  condition: string,
-  format: string,
-  dateAdded: string
-}
-//type Listings = listing
+  } | null;
+  price: number;
+  forSale: boolean;
+  notes: string;
+  condition: string;
+  format: string;
+  dateAdded: string;
+};
 
-export default function RenderTrack({listing}:Prop){
+export default function RenderTrack({ listing }: Prop) {
   const setModal = useStore((store) => store.setModal);
   let setFavourites = useStore((store) => store.setFavourites)
   let selectedListing = useStore((store) => store.selectedListing)
@@ -45,39 +48,35 @@ export default function RenderTrack({listing}:Prop){
   }
   
   
-  return<>
-    <article className="listing-article" key={listing.id}>
-      <div className="recordImage" onClick={() => displayDetails()}>
-        <img className="albumImage"
-          src={listing.Track?.coverURL} alt={listing.Track?.trackName}/>
-      </div>
+  return (
+    <>
+      <article className="listing-article" key={listing.id}>
+        <div className="recordImage" onClick={() => displayDetails()>
+          <img
+            className="albumImage"
+            src={listing.Track?.coverURL || listing.Album?.coverURL}
+            alt={listing.Track?.trackName || listing.Album?.albumname}
+          />
+        </div>
         <div className="recordInfoDb">
-        <div className="artistCardTextInfo">Artist: {listing.Track?.artistName}</div>
-        <div className="artistCardTextInfo">Song: {listing.Track?.trackName}</div>       
-        <div className="artistCardTextInfo">Condition: {listing.condition}</div>
-        <div className="artistCardTextInfo">Sold By: {listing.User.name}</div>
-        <div className="artistCardTextInfo">Price: ${listing.price}</div>
-      </div>
-      <div className="recordCardButtons">
-        <button className="recordBuyButtn">Buy</button>
-        <button className="recordFavBttn" onClick={() => addToFavourites()}>
-          Add to Favourites</button>
-      </div>
-    </article> 
-  </>
-}
-
-/*
-type Prop = {
-  listing: {
-    artistName:string,
-    trackName:string,
-    owner:string,
-    coverURL:string,
-    condition:string,
-    format:string,
-    price:number
-  }
-}
-*/
-
+          <div className="artistCardTextInfo">
+            Artist: {listing.Track?.artistName || listing.Album?.artist}
+          </div>
+          <div className="artistCardTextInfo">
+            {listing.Track ? `Song: ${listing.Track?.trackName}` : `Album: ${listing.Album?.albumname}`}
+          </div>
+          <div className="artistCardTextInfo">
+            Condition: {listing.condition}
+          </div>
+          <div className="artistCardTextInfo">
+            Sold By: {listing.User.username}
+          </div>
+          <div className="artistCardTextInfo">Price: ${listing.price}</div>
+        </div>
+        <div className="recordCardButtons">
+          <button className="recordBuyButtn">Buy</button>
+          <button className="recordFavBttn" onClick={() => addToFavourites()}>Add to Favourites</button>
+        </div>
+      </article>
+    </>
+  );
