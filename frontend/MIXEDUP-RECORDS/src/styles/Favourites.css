@@ -1,0 +1,36 @@
+
+.favourites-heading{
+  text-align: center;
+}
+
+.favourites-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 200px);
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 30px;
+    align-content: center;
+    background-color: rgb(126, 163, 194); 
+    padding-top: 20px;
+    padding-left:3%;
+    min-height: 490px;
+  }
+
+.artistCardTextInfo,
+.albumCardTextInfo {
+  font-size: 1.2rem;
+}
+.button-container{
+  display: grid;
+  grid-template: 
+  ". removefavourite . buy-favourite ." auto/
+  1fr auto 1fr auto 1fr;
+  padding-bottom: 2ch;
+}
+
+.remove-favourite{
+  grid-area: removefavourite;
+}
+.buy-favourite{
+  grid-area: buy-favourite
+}

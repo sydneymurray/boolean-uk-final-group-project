@@ -3,9 +3,12 @@ import React from "react";
 
 import SignUpModal from "../components/SignUpModal";
 import IncorrectLoginModal from "../components/IncorrectLoginModal";
+
 import SellItemModal from "../components/SellItemModal";
 import SuccessfulListingModal from "../components/SuccessfulListingModal"
 import FailedListingModal from "../components/FailedListingModal"
+import FavouriteDetailsModal from "../components/FavouriteDetailsModal"
+
 
 type modal = {
   [index: string]: null | (() => JSX.Element);
@@ -17,7 +20,8 @@ const modals: modal = {
   wrongDetails: IncorrectLoginModal,
   sellItem: SellItemModal,
   newListing: SuccessfulListingModal,
-  listingFailed: FailedListingModal
+  listingFailed: FailedListingModal,
+  favouriteDetails: FavouriteDetailsModal
 };
 
 export function ModalContainer() {

@@ -1,5 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider          = "postgresql"
@@ -7,20 +8,15 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 model User {
-  id         Int          @id @default(autoincrement())
-  name       String
-  username   String
-  email      String       @unique
-  password   String
-  Listings   Listings[]
-  Favourites Favourites[]
-  previous_owner  Transaction_Table[] @relation("previous owner")
-  new_owner  Transaction_Table[]  @relation("new owner")
+  id                Int                 @id @default(autoincrement())
+  name              String
+  username          String
+  email             String              @unique(map: "User.email_unique")
+  password          String
+  Favourites        Favourites[]
+  Listings          Listings[]
+  Transaction_Table Transaction_Table[]
 }
 
 model Track {
@@ -31,32 +27,22 @@ model Track {
   Listings   Listings[]
 }
 
-enum Format {
-  DUBPLATE
-  MP3
-  VINYL6
-  VINAL7
-  VINAL10
-  VINAL12
-  ALBUM
-}
-
 model Listings {
-  id        Int      @id @default(autoincrement())
-  user      Int
-  User      User     @relation(fields: [user], references: [id])
-  track     Int?
-  Track     Track?    @relation(fields: [track], references: [id])
-  price     Float
-  forSale   Boolean  @default(true)
-  notes     String   @db.VarChar(255)
-  condition String   @db.VarChar(255)
-  format    Format   @default(MP3)
-  dateAdded DateTime @default(now())
-  Transaction Transaction_Table[]
-  Album      Album?       @relation(fields: [albumId], references: [id])
-  albumId    Int?
-  Favourites Favourites[]
+  id                Int                 @id @default(autoincrement())
+  user              Int
+  track             Int?
+  price             Float
+  forSale           Boolean             @default(true)
+  notes             String              @db.VarChar(255)
+  condition         String              @db.VarChar(255)
+  format            Format              @default(MP3)
+  dateAdded         DateTime            @default(now())
+  albumId           Int?
+  Album             Album?              @relation(fields: [albumId], references: [id])
+  Track             Track?              @relation(fields: [track], references: [id])
+  User              User                @relation(fields: [user], references: [id], onDelete: Cascade)
+  Favourites        Favourites[]
+  Transaction_Table Transaction_Table[]
 }
 
 model Album {
@@ -70,9 +56,28 @@ model Album {
 model Favourites {
   id       Int      @id @default(autoincrement())
   user     Int
-  User     User     @relation(fields: [user], references: [id])
   listing  Int
-  Listings Listings @relation(fields: [listing], references: [id])
+  Listings Listings @relation(fields: [listing], references: [id], onDelete: Cascade)
+  User     User     @relation(fields: [user], references: [id], onDelete: Cascade)
+}
+
+model Transaction_Table {
+  id               Int      @id @default(autoincrement())
+  previous_ownerId Int
+  new_ownerId      Int
+  listing          Int
+  Listings         Listings @relation(fields: [listing], references: [id], onDelete: Cascade)
+  User             User     @relation(fields: [previous_ownerId], references: [id], onDelete: Cascade)
+}
+
+enum Format {
+  DUBPLATE
+  MP3
+  VINYL6
+  VINAL7
+  VINAL10
+  VINAL12
+  ALBUM
 }
 
 model Transaction_Table {

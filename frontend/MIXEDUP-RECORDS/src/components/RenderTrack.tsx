@@ -1,5 +1,6 @@
-import React from "react";
-import "../styles/RenderTrack.css";
+import React from "react"
+import "../styles/RenderTrack.css"
+import { useStore } from "../Hooks/Store";
 
 type Prop = {
   listing: listing;
@@ -29,10 +30,28 @@ type listing = {
 };
 
 export default function RenderTrack({ listing }: Prop) {
+  const setModal = useStore((store) => store.setModal);
+  let setFavourites = useStore((store) => store.setFavourites)
+  let selectedListing = useStore((store) => store.selectedListing)
+  let setSelectedListing = useStore((store) => store.setSelectedListing) 
+  let addFavourite = useStore((store) => store.addFavourite)  
+
+  function displayDetails(){
+    setSelectedListing(listing)
+    setModal("favouriteDetails")
+  }
+
+  function addToFavourites(){
+      console.log(listing)
+    //addFavourite(listing.id)
+    
+  }
+  
+  
   return (
     <>
       <article className="listing-article" key={listing.id}>
-        <div className="recordImage">
+        <div className="recordImage" onClick={() => displayDetails()>
           <img
             className="albumImage"
             src={listing.Track?.coverURL || listing.Album?.coverURL}
@@ -56,23 +75,8 @@ export default function RenderTrack({ listing }: Prop) {
         </div>
         <div className="recordCardButtons">
           <button className="recordBuyButtn">Buy</button>
-          <button className="recordFavBttn">Add to Favourites</button>
+          <button className="recordFavBttn" onClick={() => addToFavourites()}>Add to Favourites</button>
         </div>
       </article>
     </>
   );
-}
-
-/*
-type Prop = {
-  listing: {
-    artistName:string,
-    trackName:string,
-    owner:string,
-    coverURL:string,
-    condition:string,
-    format:string,
-    price:number
-  }
-}
-*/
