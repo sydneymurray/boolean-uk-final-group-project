@@ -79,3 +79,14 @@ enum Format {
   VINAL12
   ALBUM
 }
+
+model Transaction_Table {
+  id        Int        @id @default(autoincrement())
+  previous_ownerId  Int
+  new_ownerId Int
+  listing   Int
+  Listing   Listings   @relation(fields: [listing], references: [id])
+  previous_owner  User  @relation("previous owner", fields: [previous_ownerId], references: [id])
+  new_owner       User  @relation("new owner", fields: [previous_ownerId], references: [id])
+}
+
