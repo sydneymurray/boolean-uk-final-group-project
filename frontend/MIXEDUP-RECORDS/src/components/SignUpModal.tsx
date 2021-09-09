@@ -11,11 +11,18 @@ export default function ModalPopUp() {
   
   function registerNewUser(event: SyntheticEvent){
     event.preventDefault();
-    let newUser = {
-      name: document.querySelector('.newUsersName')?.value,
-      username: document.querySelector('.newUsername')?.value,
-      email: document.querySelector('.newUsersEmail')?.value,
-      password: document.querySelector('.newUserPassword')?.value
+    const {
+      newUsersName: name,
+      newUsername: username,
+      newUsersEmail: email,
+      newUserPassword: password,
+    } = event.target as HTMLFormElement
+
+    const newUser = {
+      name: name,
+      username: username,
+      email: email,
+      password: password
     }
     
     registerUser(newUser).then(data => {

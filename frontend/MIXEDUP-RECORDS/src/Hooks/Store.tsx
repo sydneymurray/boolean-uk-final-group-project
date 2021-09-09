@@ -22,8 +22,8 @@ type Store = {
   retrieveFavourites: () => void
   deleteFavourite: (id: number) => void
   setFavourites: (updatedFavourite: Favourite[]) => void
-  selectedListing: Listings | null
-  setSelectedListing: (listing: Listings) => void
+  selectedListing: listing | null
+  setSelectedListing: (listing: listing) => void
   addFavourite: (id: number) => void
 };
 
@@ -65,22 +65,8 @@ type Favourite = {
   id: number
   user: number
   listing: number
-  Listings: listings | listing
+  Listings: listing
   }
-
- type Listings = {
-  id: number
-  user: number
-  track: number
-  price: number
-  forSale: boolean
-  notes: string
-  condition: string
-  format: string
-  dateAdded: string
-  albumId: number | null
-  Track: Track
-}
 
 type Track = {
   id: number
@@ -88,7 +74,6 @@ type Track = {
   trackName: string,
   coverURL: string
 } 
-type listing = listings
 
 
 export const useStore = create<Store>((set, get) => ({

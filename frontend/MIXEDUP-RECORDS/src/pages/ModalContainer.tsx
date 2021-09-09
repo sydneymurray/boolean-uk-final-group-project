@@ -11,7 +11,7 @@ import FavouriteDetailsModal from "../components/FavouriteDetailsModal"
 
 
 type modal = {
-  [index: string]: null | (() => JSX.Element);
+  [index: string]: null | (() => JSX.Element | null);
 };
 
 const modals: modal = {

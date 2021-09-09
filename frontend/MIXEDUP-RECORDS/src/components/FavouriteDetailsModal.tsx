@@ -11,7 +11,7 @@ export default function ModalPopUp() {
   const setModal = useStore((store) => store.setModal);
   const setSelectedListing = useStore((store) => store.setSelectedListing);
   const selectedListing = useStore((store) => store.selectedListing);
-  if (!selectedListing) {setModal("");  return}
+  if (!selectedListing) {setModal("");  return null}
 
   return (
     <div className="modal-bg">
@@ -19,7 +19,7 @@ export default function ModalPopUp() {
         <h2>Track Details</h2>
         <div className="recordImage">
         <img className="modalalbumImage" width="400"
-          src={selectedListing.Track.coverURL} alt={selectedListing.Track?.trackName}/>
+          src={selectedListing.Track?.coverURL} alt={selectedListing.Track?.trackName}/>
       </div>
         <div className="recordInfoDb">
         <div className="artistCardTextInfo">Artist: {selectedListing.Track?.artistName}</div>

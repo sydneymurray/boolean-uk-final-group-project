@@ -51,7 +51,7 @@ export default function RenderTrack({ listing }: Prop) {
   return (
     <>
       <article className="listing-article" key={listing.id}>
-        <div className="recordImage" onClick={() => displayDetails()>
+        <div className="recordImage" onClick={() => displayDetails()}>
           <img
             className="albumImage"
             src={listing.Track?.coverURL || listing.Album?.coverURL}
@@ -79,4 +79,5 @@ export default function RenderTrack({ listing }: Prop) {
         </div>
       </article>
     </>
-  );
+  )
+  }
