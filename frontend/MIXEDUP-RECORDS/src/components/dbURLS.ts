@@ -6,3 +6,4 @@ export let TOKEN_CHECK: string = "http://localhost:3100/users/current"
 
 export let FAVOURITES: string = "http://localhost:3100/favourites"
 
+
