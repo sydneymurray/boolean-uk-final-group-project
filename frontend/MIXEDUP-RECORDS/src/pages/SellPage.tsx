@@ -6,9 +6,8 @@ import "../styles/sellPageStyles.css";
 
 export default function Sell() {
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState<RawSearchResults>(
-    "Search above for results"
-  );
+  const [searchResults, setSearchResults] = useState<RawSearchResults>();
+  // "Search above for results"
   const searchcriteria = useStore((store) => store.searchcriteria);
   const setSearchcriteria = useStore((store) => store.setSearchcriteria);
   let apiListing = searchResults;
@@ -124,18 +123,30 @@ export default function Sell() {
 
   return (
     <>
-      <article className="sellSearchBar">
+      <article className="searchSellBar">
         <h2 className="searchCopy">Search for the record you wanna sell...</h2>
 
-        <label htmlFor="musicOptions">Choose an option: </label>
+        {/* <label htmlFor="musicOptions">Choose an option: </label> */}
 
-        <select name="musicOptions" id="musicOptions" onChange={handleSelect}>
-          <option value="artist">Artist</option>
-          <option value="album">Album</option>
-          <option value="track">Track</option>
+        <select
+          className="searchInput"
+          name="musicOptions"
+          id="musicOptions"
+          onChange={handleSelect}
+        >
+          <option className="searchInput" value="artist">
+            Artist
+          </option>
+          <option className="searchInput" value="album">
+            Album
+          </option>
+          <option className="searchInput" value="track">
+            Track
+          </option>
         </select>
 
         <input
+          className="searchBar"
           placeholder="search"
           onChange={(e) => setSearch(e.target.value)}
         ></input>

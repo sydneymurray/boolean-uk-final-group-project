@@ -2,6 +2,7 @@
   display: grid;
   grid-auto-flow: column;
   background-color: rgb(111, 180, 180);
+
   padding: 50px;
 }
 
@@ -19,5 +20,5 @@
 }
 
 .logo {
-  width: 250px;
+  width: 150px;
 }
