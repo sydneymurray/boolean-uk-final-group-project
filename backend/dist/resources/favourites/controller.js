@@ -7,16 +7,15 @@ exports.deleteOne = exports.retrieveAll = exports.createOne = void 0;
 const client_1 = __importDefault(require("../../utils/client"));
 function createOne(req, res) {
     let authDetails = req.currentUser;
-    try {
-        client_1.default.favourites.create({ data: {
-                user: Number(authDetails.id),
-                listing: Number(req.body.listing)
-            } })
-            .then(dbResponse => res.json(dbResponse));
-    }
-    catch (error) {
-        res.status(500).json({ msg: "Data was not saved due to a problem" });
-    }
+    client_1.default.favourites.create({ data: {
+            user: Number(authDetails.id),
+            listing: Number(req.params.id)
+        } })
+        .then(dbResponse => res.json(dbResponse))
+        .catch(dbResponse => res.status(500).json({
+        msg: "Data was not saved due to a problem",
+        error: dbResponse
+    }));
 }
 exports.createOne = createOne;
 function retrieveAll(req, res) {

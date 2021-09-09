@@ -3,6 +3,7 @@ import React from "react";
 
 import SignUpModal from "../components/SignUpModal";
 import IncorrectLoginModal from "../components/IncorrectLoginModal";
+import FavouriteDetailsModal from "../components/FavouriteDetailsModal"
 
 type modal = {
   [index: string]: null | (() => JSX.Element);
@@ -12,6 +13,7 @@ const modals: modal = {
   "": null,
   newUser: SignUpModal,
   wrongDetails: IncorrectLoginModal,
+  favouriteDetails: FavouriteDetailsModal
 };
 
 export function ModalContainer() {
