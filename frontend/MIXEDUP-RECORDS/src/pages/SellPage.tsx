@@ -72,7 +72,6 @@ export default function Sell() {
         if (fetchResults.total) {
           setSearchResults(fetchResults)
           setAlbumResults(fetchResults.albumData)
-          console.log("original fetch", fetchResults.albumData)
         } else {
           setSearchResults("Can't find what you looking for")
         }
@@ -80,12 +79,6 @@ export default function Sell() {
       .catch((error) => console.error("FETCH ERROR:", error));
   }
 
-  // we need from api:
-  // album.cover_medium
-  // album.title
-  // artist.name
-
-  //getting next 25 results
 
   function getNextResults() {
     if (typeof apiListing === "object" && apiListing.next) {
@@ -105,9 +98,7 @@ export default function Sell() {
             };
             const storedTitleArray = fetchResults.albumData.map((albumObject: { title: string }) => albumObject.title)
             if (!storedTitleArray.includes(albumObject.title)) {
-              console.log("I ran");
               fetchResults.albumData = [...fetchResults.albumData, albumObject]
-              console.log("after iteration", fetchResults.albumData);
             }
           }
   
