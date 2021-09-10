@@ -54,12 +54,11 @@ export default function SellItemModal() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(listingInfo),
-          })
-          .then((res) => {
+          }).then((res) => {
             if (res.ok) {
-              setModal("newListing")
-            }else setModal("listingFailed")
-          })
+              setModal("newListing");
+            } else setModal("listingFailed");
+          });
         });
     } else {
       const trackDetails = {
@@ -93,12 +92,11 @@ export default function SellItemModal() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(listingInfo),
-          })
-            .then((res) => {
-              if (res.ok) {
-                setModal("newListing")
-              }else setModal("listingFailed")
-            })
+          }).then((res) => {
+            if (res.ok) {
+              setModal("newListing");
+            } else setModal("listingFailed");
+          });
         });
     }
   }
@@ -134,7 +132,9 @@ export default function SellItemModal() {
           <label htmlFor="notes">Notes: </label>
           <input className="notes" type="text" name="notes" required />
 
-          <button formAction="submit">yes sell this shit man</button>
+          <button className="sellBttnModal" formAction="submit">
+            yes sell this shit man
+          </button>
 
           <span
             className="modalClose"

@@ -15,8 +15,9 @@ export default function Sell() {
   const handleSelect = (e: any) => {
     setSearchcriteria(e.target.value);
   };
-  type RawSearchResults = {
-        albumData: AlbumResults[] | null
+  type RawSearchResults =
+    | {
+        albumData: AlbumResults[] | null;
         data: SearchResults[] | null;
         total: Number | null;
         next: string | null;
@@ -30,15 +31,15 @@ export default function Sell() {
   };
 
   type AlbumResults = {
-    artistName: string,
-    cover: string,
-    cover_big: string,
-    cover_medium: string,
-    cover_small: string,
-    cover_xl: string,
-    title: string,
-    tracklist: string
-  }
+    artistName: string;
+    cover: string;
+    cover_big: string;
+    cover_medium: string;
+    cover_small: string;
+    cover_xl: string;
+    title: string;
+    tracklist: string;
+  };
 
   // i need to add a if statement in below to catch errors if the info is not in the api
 
@@ -81,8 +82,9 @@ export default function Sell() {
             ...item.album,
             artistName: item.artist.name,
           };
-          const albumTitleArray = fetchResults.albumData
-          .map((albumObject: { title: string }) => albumObject.title)
+          const albumTitleArray = fetchResults.albumData.map(
+            (albumObject: { title: string }) => albumObject.title
+          );
           if (!albumTitleArray.includes(item.album.title)) {
             fetchResults.albumData = [...fetchResults.albumData, albumObject];
           }
@@ -151,7 +153,13 @@ export default function Sell() {
           onChange={(e) => setSearch(e.target.value)}
         ></input>
 
-        <button onClick={() => getAlbumResults()}>SEARCH</button>
+        <button
+          type="submit"
+          className="searchApiButton"
+          onClick={() => getAlbumResults()}
+        >
+          SEARCH
+        </button>
       </article>
       <div className="apiResults">
         {typeof apiListing === "object" && apiListing.data ? (
@@ -175,7 +183,9 @@ export default function Sell() {
           <h1>{searchResults}</h1>
         )}
       </div>
-      <button onClick={() => getNextResults()}>Next 25 results</button>
+      <button className="nextResults" onClick={() => getNextResults()}>
+        Next 25 results
+      </button>
     </>
   );
 }
