@@ -6,7 +6,7 @@ export default function ModalPopUp() {
   const setModal = useStore((store) => store.setModal);
   return (
     <div className="modal-bg">
-      <p className="modal">
+      <p className="modalFailedListing">
         There has been an issue in registering your listing.  Please try again later 🙏 
         <span
           className="modalClose"

@@ -1,6 +1,8 @@
 import React from "react"
 import "../styles/RenderTrack.css"
 import { useStore } from "../Hooks/Store";
+import { SyntheticEvent } from "react"
+import { TRANSACTIONS_URL } from "./dbURLS";
 
 type Prop = {
   listing: listing;
@@ -43,13 +45,30 @@ export default function RenderTrack({ listing }: Prop) {
   }
 
   function addToFavourites(){
-    if (!favourites) return
-    let  index = favourites.findIndex(fav => {
+    let  index = favourites ? favourites.findIndex(fav => {
           return fav.listing === listing.id
-      })
+      }) : -1
     if (index !== -1) return 
     addFavourite(listing.id)
     retrieveFavourites()
+  }
+
+  function listingPurchased(e: SyntheticEvent) {
+    fetch(TRANSACTIONS_URL,{
+       credentials: "include",
+       method: "POST",
+       headers: {
+         "Content-Type":"application/json"
+       },
+       body: JSON.stringify({
+         listing: listing.id
+       }) 
+    })
+    .then(res=>{
+      if (res.ok) {
+          setModal("buyItem");
+      }else setModal("failedPurchase")
+    })
   }
   
   
@@ -79,7 +98,8 @@ export default function RenderTrack({ listing }: Prop) {
           <div className="artistCardTextInfo">Price: ${listing.price}</div>
         </div>
         <div className="recordCardButtons">
-          <button className="recordBuyButtn">Buy</button>
+          <button className="recordBuyButtn" onClick={listingPurchased}>Buy</button>
+        
           <button className="recordFavBttn" onClick={() => addToFavourites()}>Add to Favourites</button>
         </div>
       </article>

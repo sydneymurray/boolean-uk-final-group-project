@@ -11,10 +11,13 @@ export function createOne(req: Request, res: Response){
         }})
         .then(dbResponse => res.json(dbResponse))
         .catch (dbResponse =>
-            res.status(500).json({ 
+        {    res.status(500).json({ 
                 msg: "Data was not saved due to a problem",
                 error: dbResponse
-        }))
+        })
+        console.log(dbResponse);
+        
+    })
 }
 
 export function retrieveAll(req: Request, res: Response){

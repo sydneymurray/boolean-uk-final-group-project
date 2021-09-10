@@ -35,6 +35,10 @@ function createOne(req, res) {
             let dbResponse = yield client_1.default.transaction_Table.create({
                 data: transaction
             });
+            yield client_1.default.listings.update({
+                where: { id: Number(req.body.listing) },
+                data: { forSale: false }
+            });
             res.json({ data: dbResponse });
         }
         res.status(500).json({
@@ -46,13 +50,14 @@ exports.createOne = createOne;
 function retrieveAll(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const authDetails = req.currentUser;
+        console.log(authDetails);
         let dbResponseSold = yield client_1.default.transaction_Table.findMany({
+            where: { previous_ownerId: authDetails.id },
             include: { Listing: {
                     include: { Track: true }
                 },
                 previous_owner: { select: { id: true, email: true, username: true, name: true } },
                 new_owner: { select: { id: true, email: true, username: true, name: true } } },
-            //where: {previous_ownerId : Number(authDetails.id)}
         });
         if (!dbResponseSold)
             res.status(500).json({
@@ -64,7 +69,7 @@ function retrieveAll(req, res) {
                 },
                 previous_owner: { select: { id: true, email: true, username: true, name: true } },
                 new_owner: { select: { id: true, email: true, username: true, name: true } } },
-            //where: {previous_ownerId: Number(authDetails.id)}
+            where: { new_ownerId: authDetails.id }
         });
         if (!dbResponseBought)
             res.status(500).json({

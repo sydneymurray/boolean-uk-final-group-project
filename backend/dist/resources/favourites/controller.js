@@ -12,10 +12,13 @@ function createOne(req, res) {
             listing: Number(req.body.listing)
         } })
         .then(dbResponse => res.json(dbResponse))
-        .catch(dbResponse => res.status(500).json({
-        msg: "Data was not saved due to a problem",
-        error: dbResponse
-    }));
+        .catch(dbResponse => {
+        res.status(500).json({
+            msg: "Data was not saved due to a problem",
+            error: dbResponse
+        });
+        console.log(dbResponse);
+    });
 }
 exports.createOne = createOne;
 function retrieveAll(req, res) {

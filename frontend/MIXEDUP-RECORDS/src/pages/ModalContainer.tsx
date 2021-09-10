@@ -9,6 +9,10 @@ import SuccessfulListingModal from "../components/SuccessfulListingModal"
 import FailedListingModal from "../components/FailedListingModal"
 import FavouriteDetailsModal from "../components/FavouriteDetailsModal"
 import FailedSignUpModal from "../components/FailedSignUpModal"
+import FavouritesButtonModal from "../components/FavouritesButtonModal"
+import BuyButtonModal from "../components/BuyButtonModal"
+import FailedPurchaseModal from "../components/FailedListingModal"
+import FailedFavouriteModal from "../components/FailedFavouriteModal"
 
 
 type modal = {
@@ -23,7 +27,11 @@ const modals: modal = {
   newListing: SuccessfulListingModal,
   listingFailed: FailedListingModal,
   favouriteDetails: FavouriteDetailsModal,
-  signupFailed: FailedSignUpModal
+  signupFailed: FailedSignUpModal,
+  favourteAdded: FavouritesButtonModal,
+  buyItem: BuyButtonModal,
+  failedPurchase: FailedPurchaseModal,
+  failedFavourite: FailedFavouriteModal
 };
 
 export function ModalContainer() {

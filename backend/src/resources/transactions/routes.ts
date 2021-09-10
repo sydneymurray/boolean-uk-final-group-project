@@ -2,9 +2,9 @@ import { Router } from "express";
 import { retrieveAll } from "./controller";
 import {createOne} from "./controller"
 
-const favouritesRouter = Router()
+const transactionRouter = Router()
 
-favouritesRouter.get("/", retrieveAll)
-favouritesRouter.post("/", createOne)
+transactionRouter.get("/", retrieveAll)
+transactionRouter.post("/", createOne)
 
-export default favouritesRouter 
+export default transactionRouter 

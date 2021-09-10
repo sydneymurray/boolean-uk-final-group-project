@@ -5,6 +5,7 @@ import { FAVOURITES } from "../components/dbURLS";
 // IMPORT DUMMY DATA UNTIL BACKEND IS COMPLETE
 import {dummyListings} from "../components/dummyData"
 import Favourites from "../pages/Favourites";
+import { item } from "../components/RenderItem"
 
 type Store = {
   modal: string;
@@ -22,8 +23,8 @@ type Store = {
   retrieveFavourites: () => void
   deleteFavourite: (id: number) => void
   setFavourites: (updatedFavourite: Favourite[]) => void
-  selectedListing: listing | null
-  setSelectedListing: (listing: listing) => void
+  selectedListing: listing | null | item
+  setSelectedListing: (listing: listing | item) => void
   addFavourite: (id: number) => void
 };
 
@@ -34,7 +35,7 @@ type newUserType = {
   password: string;
 };
 
-type listing = {
+export type listing = {
   id: number;
   User: {
     username: string;
@@ -126,6 +127,10 @@ export const useStore = create<Store>((set, get) => ({
       credentials: 'include',
       headers:{'Content-Type': 'Application/json'},
       body: JSON.stringify({listing: id})
+    })
+    .then(res=>{
+      if (res.ok) get().setModal("favourteAdded")
+      else get().setModal("failedFavourite")
     })
   },
   setFavourites: updatedFavourites => set(store => ({ 

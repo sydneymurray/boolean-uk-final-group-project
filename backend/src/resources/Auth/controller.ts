@@ -43,7 +43,11 @@ export const createUser = async (req: Request, res: Response) => {
 export const getAllListings = async (req: Request, res: Response) => {
   try {
     const allListings = await dbClient.listings.findMany({
+      where: {
+        forSale: true
+      },
       select: {
+        id: true,
         price: true,
         forSale: true,
         notes: true,
