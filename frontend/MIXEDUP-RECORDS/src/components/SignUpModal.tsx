@@ -1,13 +1,12 @@
 import React, { SyntheticEvent } from "react";
-import registerUser from "./registerUser"
+import registerUser from "./registerUser";
 import "../styles/modalStyling.css";
 import { useStore } from "../Hooks/Store";
-
-
+import { useHistory } from "react-router-dom";
 
 export default function ModalPopUp() {
   const setModal = useStore((store) => store.setModal);
-  //const setUser = useStore((store) => store.setUser);
+  const history = useHistory();
   
   function registerNewUser(event: SyntheticEvent){
     event.preventDefault();
@@ -16,7 +15,7 @@ export default function ModalPopUp() {
       username: username,
       email: email,
       password: password,
-    } = event.target as HTMLFormElement
+    } = event.target as HTMLFormElement;
 
     const newUser = {
       name: name.value,
@@ -24,14 +23,9 @@ export default function ModalPopUp() {
       email: email.value,
       password: password.value
     }
-
-    console.log(newUser);
     
     
-    registerUser(newUser).then(data => {
-      setModal("")
-      alert("Login username "+data.user.username+" succesfully created "+data.user.id)
-    })
+    registerUser(newUser, history, setModal)
   }
 
   return (
@@ -39,7 +33,12 @@ export default function ModalPopUp() {
       <div className="modal">
         <h1>Sign up</h1>
         <label htmlFor="name">Name: </label>
-        <input className="newUsersName" type="text" name="formalName" required />
+        <input
+          className="newUsersName"
+          type="text"
+          name="formalName"
+          required
+        />
 
         <label htmlFor="name">User Name: </label>
         <input className="newUsername" type="text" name="username" required />
@@ -47,11 +46,25 @@ export default function ModalPopUp() {
         <label htmlFor="name">Email: </label>
         <input className="newUsersEmail" type="email" name="email" required />
         <label htmlFor="password">Password: </label>
-        <input className="newUserPassword" type="password" name="password" required/>
+        <input
+          className="newUserPassword"
+          type="password"
+          name="password"
+          required
+        />
 
-        <button type="submit" className="modalJoinButton">Join</button>
+        <button type="submit" className="modalJoinButton">
+          Join
+        </button>
 
-        <span className="modalClose" onClick={() => {setModal("")}}>
+        {/* when you click the above button you should go to http://localhost:3000/search and be logged in  */}
+
+        <span
+          className="modalClose"
+          onClick={() => {
+            setModal("");
+          }}
+        >
           ❎
         </span>
       </div>

@@ -6,3 +6,4 @@ export let FAVOURITES: string = "http://localhost:3100/favourites";
 export let NEW_ALBUM: string = "http://localhost:3100/albums";
 export let NEW_LISTING: string = "http://localhost:3100/listings";
 export let NEW_TRACK: string = "http://localhost:3100/tracks";
+export let LOG_OUT: string = "http://localhost:3100/logout";

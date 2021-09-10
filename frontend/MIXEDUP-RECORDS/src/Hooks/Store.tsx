@@ -57,7 +57,7 @@ type listing = {
   dateAdded: string;
 };
 
-type ModalData = {
+export type ModalData = {
   [key: string]: string;
 };
 

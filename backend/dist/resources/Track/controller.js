@@ -18,11 +18,30 @@ function createOneTrack(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const trackDetails = req.body;
         try {
+            const allTracks = yield client_1.default.track.findMany();
+            const artistCheck = allTracks.some(track => track.artistName === trackDetails.artistName);
+            const trackNameCheck = allTracks.some(track => track.trackName === trackDetails.trackName);
+            if (artistCheck && trackNameCheck) {
+                const trackRequired = yield client_1.default.track.findFirst({
+                    where: {
+                        artistName: trackDetails.artist,
+                        trackName: trackDetails.trackName
+                    }
+                });
+                return res.json({ msg: "this track was already in the DB", data: trackRequired });
+            }
+        }
+        catch (error) {
+            res
+                .status(401)
+                .json({ msg: "You do not have permission to access this route" });
+        }
+        try {
             const newTrack = yield client_1.default.track.create({
                 data: trackDetails,
             });
             res.json({
-                msg: "album successfully added to DB",
+                msg: "track successfully added to DB",
                 data: newTrack,
             });
         }

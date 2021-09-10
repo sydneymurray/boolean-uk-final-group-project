@@ -10,12 +10,17 @@
 
 .albumImage {
   width: 100%;
+  cursor: pointer;
 }
 
 .recordBuyButtn,
 .recordFavBttn {
   display: block;
   margin: 10px;
+  font-family: "Abel", sans-serif;
+  color: red;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .artistCardTextInfo,
