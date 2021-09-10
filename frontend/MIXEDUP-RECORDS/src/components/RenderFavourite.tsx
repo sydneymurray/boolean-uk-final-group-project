@@ -9,22 +9,31 @@ type Favourite = {
   id: number
   user: number
   listing: number
-  Listings: Listings
+  Listings: listing 
   }
 
- type Listings = {
-  id: number
-  user: number
-  track: number
-  price: number
-  forSale: boolean
-  notes: string
-  condition: string
-  format: string
-  dateAdded: string
-  albumId: number | null
-  Track: Track
-}
+  type listing = {
+    id: number;
+    User: {
+      username: string;
+    };
+    Track: {
+      artistName: string;
+      trackName: string;
+      coverURL: string;
+    } | null;
+    Album: {
+      artist: string,
+      albumname: string,
+      coverURL: string
+    } | null;
+    price: number;
+    forSale: boolean;
+    notes: string;
+    condition: string;
+    format: string;
+    dateAdded: string;
+  };
 
 type Track = {
   id: number
@@ -58,7 +67,7 @@ export default function RenderFavourite({favourite}:Prop){
     <article className="favourite-article" key={favourite.id}>
       <div className="recordImage" onClick={() => displayDetails()}>
         <img className="albumImage"
-          src={favourite.Listings.Track.coverURL} alt={favourite.Listings.Track?.trackName}/>
+          src={favourite.Listings.Track?.coverURL} alt={favourite.Listings.Track?.trackName}/>
       </div>
         <div className="recordInfoDb">
         <div className="artistCardTextInfo">Artist: {favourite.Listings.Track?.artistName}</div>

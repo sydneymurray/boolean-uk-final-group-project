@@ -83,3 +83,4 @@ export const logoutUser = (req: Request, res: Response) => {
   res.cookie("token", "", { maxAge: 1 });
   res.redirect("/");
 };
+

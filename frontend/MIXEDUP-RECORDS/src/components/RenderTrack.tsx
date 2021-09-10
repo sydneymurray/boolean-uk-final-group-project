@@ -31,10 +31,11 @@ type listing = {
 
 export default function RenderTrack({ listing }: Prop) {
   const setModal = useStore((store) => store.setModal);
-  let setFavourites = useStore((store) => store.setFavourites)
+  let retrieveFavourites = useStore((store) => store.retrieveFavourites)
   let selectedListing = useStore((store) => store.selectedListing)
   let setSelectedListing = useStore((store) => store.setSelectedListing) 
   let addFavourite = useStore((store) => store.addFavourite)  
+  let favourites = useStore(store => store.favourites)
 
   function displayDetails(){
     setSelectedListing(listing)
@@ -42,9 +43,13 @@ export default function RenderTrack({ listing }: Prop) {
   }
 
   function addToFavourites(){
-      console.log(listing)
-    //addFavourite(listing.id)
-    
+    if (!favourites) return
+    let  index = favourites.findIndex(fav => {
+          return fav.listing === listing.id
+      })
+    if (index !== -1) return 
+    addFavourite(listing.id)
+    retrieveFavourites()
   }
   
   

@@ -7,7 +7,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = require("dotenv");
-const routes_1 = __importDefault(require("./resources/User/routes"));
+const routes_1 = __importDefault(require("./resources/user/routes"));
 const cors_1 = __importDefault(require("cors"));
 const routes_2 = __importDefault(require("./resources/Auth/routes"));
 const JWTGenerator_1 = require("./utils/JWTGenerator");
@@ -15,6 +15,7 @@ const routes_3 = __importDefault(require("./resources/favourites/routes"));
 const routes_4 = __importDefault(require("./resources/Album/routes"));
 const routes_5 = __importDefault(require("./resources/Listings/routes"));
 const routes_6 = __importDefault(require("./resources/Track/routes"));
+const routes_7 = __importDefault(require("./resources/transactions/routes"));
 (0, dotenv_1.config)();
 var app = (0, express_1.default)();
 // view engine setup
@@ -44,6 +45,7 @@ app.use("/users", routes_1.default);
 app.use("/albums", routes_4.default);
 app.use("/listings", routes_5.default);
 app.use("/tracks", routes_6.default);
+app.use("/transactions", routes_7.default);
 // catch 404 and forward to error handler
 app.all("*", (req, res) => {
     res.status(404).json("Route Not Found");

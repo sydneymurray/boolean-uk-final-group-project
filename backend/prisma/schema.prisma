@@ -79,6 +79,6 @@ model Transaction_Table {
   listing   Int
   Listing   Listings   @relation(fields: [listing], references: [id])
   previous_owner  User  @relation("previous owner", fields: [previous_ownerId], references: [id], onDelete: Cascade)
-  new_owner       User  @relation("new owner", fields: [previous_ownerId], references: [id], onDelete: Cascade)
+  new_owner       User  @relation("new owner", fields: [new_ownerId], references: [id], onDelete: Cascade)
 }
 

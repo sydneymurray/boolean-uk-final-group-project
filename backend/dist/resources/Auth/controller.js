@@ -55,6 +55,7 @@ const getAllListings = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const allListings = yield client_1.default.listings.findMany({
             select: {
+                id: true,
                 price: true,
                 forSale: true,
                 notes: true,
