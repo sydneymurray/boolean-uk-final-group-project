@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import express from "express";
 import { config } from "dotenv";
-import userRouter from "./resources/User/routes";
+import userRouter from "./resources/user/routes";
 import cors from "cors";
 import authRouter from "./resources/Auth/routes";
 import { validateToken } from "./utils/JWTGenerator";
@@ -12,6 +12,8 @@ import favouritesRouter from "./resources/favourites/routes";
 import albumRouter from "./resources/Album/routes";
 import listingRouter from "./resources/Listings/routes";
 import trackRouter from "./resources/Track/routes";
+import transactionRouter from "./resources/transactions/routes";
+
 
 config();
 
@@ -56,6 +58,8 @@ app.use("/users", userRouter);
 app.use("/albums", albumRouter);
 app.use("/listings", listingRouter);
 app.use("/tracks", trackRouter);
+app.use("/transactions", transactionRouter);
+
 // catch 404 and forward to error handler
 app.all("*", (req, res) => {
   res.status(404).json("Route Not Found");

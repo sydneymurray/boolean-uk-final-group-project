@@ -121,11 +121,11 @@ export const useStore = create<Store>((set, get) => ({
     fetch(FAVOURITES+"/"+id,{method:'DELETE',credentials: 'include'})
   },
   addFavourite: (id) => {
-    fetch(FAVOURITES+"/"+id, {
+    fetch(FAVOURITES+"/add", {
       method:'POST',
       credentials: 'include',
       headers:{'Content-Type': 'Application/json'},
-      body: JSON.stringify({})
+      body: JSON.stringify({listing: id})
     })
   },
   setFavourites: updatedFavourites => set(store => ({ 

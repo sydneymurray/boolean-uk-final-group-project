@@ -7,14 +7,14 @@ export function createOne(req: Request, res: Response){
     let authDetails = req.currentUser as User
         dbClient.favourites.create({data:{
             user: Number(authDetails.id),
-            listing: Number(req.params.id)
+            listing: Number(req.body.listing)
         }})
         .then(dbResponse => res.json(dbResponse))
         .catch (dbResponse =>
             res.status(500).json({ 
                 msg: "Data was not saved due to a problem",
                 error: dbResponse
-            }))
+        }))
 }
 
 export function retrieveAll(req: Request, res: Response){

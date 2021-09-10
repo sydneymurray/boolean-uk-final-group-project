@@ -36,6 +36,7 @@ export const getAllListings = async (req: Request, res: Response) => {
     try {
         const allListings = await dbClient.listings.findMany({
             select : {
+                id: true,
                 price: true,
                 forSale: true,
                 notes: true,
