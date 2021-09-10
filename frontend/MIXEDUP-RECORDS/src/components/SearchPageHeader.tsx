@@ -41,7 +41,7 @@ export default function SearchPageHeader() {
         <p className="loggedInUser">Logged in as: </p>
         <p className="loggedInUserName"> {`${userName}`}</p>
       </div>
-
+      
       <h1 className="strapLine">
         {" "}
         Mixed Up Records{" "}

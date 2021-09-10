@@ -2,12 +2,13 @@ import React, { SyntheticEvent } from "react";
 import registerUser from "./registerUser";
 import "../styles/modalStyling.css";
 import { useStore } from "../Hooks/Store";
+import { useHistory } from "react-router-dom";
 
 export default function ModalPopUp() {
   const setModal = useStore((store) => store.setModal);
-  //const setUser = useStore((store) => store.setUser);
-
-  function registerNewUser(event: SyntheticEvent) {
+  const history = useHistory();
+  
+  function registerNewUser(event: SyntheticEvent){
     event.preventDefault();
     const {
       formalName: name,
@@ -20,20 +21,11 @@ export default function ModalPopUp() {
       name: name.value,
       username: username.value,
       email: email.value,
-      password: password.value,
-    };
-
-    console.log(newUser);
-
-    registerUser(newUser).then((data) => {
-      setModal("");
-      alert(
-        "Login username " +
-          data.user.username +
-          " succesfully created " +
-          data.user.id
-      );
-    });
+      password: password.value
+    }
+    
+    
+    registerUser(newUser, history, setModal)
   }
 
   return (

@@ -18,6 +18,25 @@ function createOneAlbum(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const albumDetails = req.body;
         try {
+            const allAlbums = yield client_1.default.album.findMany();
+            const artistCheck = allAlbums.some(album => album.artist === albumDetails.artist);
+            const albumNameCheck = allAlbums.some(album => album.albumname === albumDetails.albumname);
+            if (artistCheck && albumNameCheck) {
+                const albumRequired = yield client_1.default.album.findFirst({
+                    where: {
+                        artist: albumDetails.artist,
+                        albumname: albumDetails.albumname
+                    }
+                });
+                return res.json({ msg: "this album was already in the DB", data: albumRequired });
+            }
+        }
+        catch (error) {
+            res
+                .status(401)
+                .json({ msg: "You do not have permission to access this route" });
+        }
+        try {
             const newAlbum = yield client_1.default.album.create({
                 data: albumDetails,
             });
