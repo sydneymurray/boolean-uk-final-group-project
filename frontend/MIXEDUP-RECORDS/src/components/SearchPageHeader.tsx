@@ -35,7 +35,7 @@ export default function SearchPageHeader() {
         <p className="loggedInUserName"> {`${userName}`}</p>
       </div>
 
-      <h1 className="strapLine">Mixed Up Reords > Buy . Sell . Vinyl</h1>
+      <h1 className="strapLine">Mixed Up Reords &gt; Buy . Sell . Vinyl</h1>
 
       <button
         className="backButton"
