@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useStore } from "../Hooks/Store";
 import { useHistory } from "react-router-dom";
 import "../styles/searchPageHeaderStyles.css";
-import { TOKEN_CHECK } from "./dbURLS";
+import { TOKEN_CHECK, LOG_OUT } from "./dbURLS";
 
 export default function SearchPageHeader() {
   const [userName, setUserName] = useState("");
@@ -23,6 +23,13 @@ export default function SearchPageHeader() {
       });
   }, []);
 
+  function logUserOut() {
+    history.push("/");
+    fetch(LOG_OUT, {
+      credentials: "include",
+    });
+  }
+
   return (
     <header className="headerStyling-Main">
       <div>
@@ -35,7 +42,19 @@ export default function SearchPageHeader() {
         <p className="loggedInUserName"> {`${userName}`}</p>
       </div>
 
-      <h1 className="strapLine">Mixed Up Reords > Buy . Sell . Vinyl</h1>
+      <h1 className="strapLine">
+        {" "}
+        Mixed Up Records{" "}
+        <span>
+          {" "}
+          <img
+            className="vinyl"
+            src="../../Public/images/vinyl.png"
+            alt="vinyl"
+          />
+        </span>{" "}
+        <span className="buySellVinyl">Buy . Sell . Vinyl</span>
+      </h1>
 
       <button
         className="backButton"
@@ -72,7 +91,14 @@ export default function SearchPageHeader() {
         My Transactions
       </button>
 
-      <button className="logOutButton">Log Out </button>
+      <button
+        className="logOutButton"
+        onClick={() => {
+          logUserOut();
+        }}
+      >
+        Log Out{" "}
+      </button>
     </header>
   );
 }

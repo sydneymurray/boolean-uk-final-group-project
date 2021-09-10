@@ -11,6 +11,8 @@
 .recordFavBttn {
   display: block;
   margin: 10px;
+  color: red;
+  border-radius: 5px;
 }
 
 .artistCardTextInfo {
