@@ -7,6 +7,7 @@ export default function LatestUploads() {
   let listings = useStore((store) => store.listings);
   let filteredListings = useStore((store) => store.filteredListings);
   let setfilteredListings = useStore((store) => store.setfilteredListings);
+  let retrieveListings = useStore((store) => store.retrieveListings);
 
   function filterListings(inputText: string) {
     if (!listings) {
@@ -44,6 +45,10 @@ export default function LatestUploads() {
   useEffect(() => {
     filterListings("");
   }, [listings]);
+
+  useEffect(() => {
+    retrieveListings();
+  }, []);
 
   if (!filteredListings) return <></>;
 

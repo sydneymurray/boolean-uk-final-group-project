@@ -25,14 +25,15 @@ export default function LandingPageHeader() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userDetails),
-    }).then((res) => {
-      if (res.ok) {
-        history.push("/search")
-      }
-      else setModal("wrongDetails")
-    }).catch((Error) => {
-      console.error(Error)
     })
+      .then((res) => {
+        if (res.ok) {
+          history.push("/search");
+        } else setModal("wrongDetails");
+      })
+      .catch((Error) => {
+        console.error(Error);
+      });
   }
 
   return (
@@ -42,6 +43,19 @@ export default function LandingPageHeader() {
         src="../../Public/images/Mixedup-logo.png"
         alt="mixed up logo"
       />
+      <h1 className="strapLine">
+        {" "}
+        Mixed Up Records{" "}
+        <span>
+          {" "}
+          <img
+            className="vinyl"
+            src="../../Public/images/vinyl.png"
+            alt="vinyl"
+          />
+        </span>{" "}
+        <span className="buySellVinyl">Buy . Sell . Vinyl</span>
+      </h1>
       <div
         className="modalPopUp"
         onClick={() => {
@@ -50,10 +64,14 @@ export default function LandingPageHeader() {
       >
         Sign Up
       </div>
-      <form onSubmit={handlesubmit}>
-        <label htmlFor="email">Log In with Email:</label>
+      <form className="logInForm" onSubmit={handlesubmit}>
+        <label className="logInWithEmail" htmlFor="email">
+          Log In with Email:
+        </label>
         <input type="email" id="email" name="email" />
-        <label htmlFor="pwd">Password:</label>
+        <label className="passwordLogin" htmlFor="pwd">
+          Password:
+        </label>
         <input type="password" id="pwd" name="pwd" minLength={8} />
         <button className="logInButton">Submit</button>
       </form>
