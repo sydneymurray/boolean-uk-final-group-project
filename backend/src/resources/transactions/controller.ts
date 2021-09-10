@@ -25,6 +25,10 @@ export async function createOne(req: Request, res: Response){
   if (transaction.previous_ownerId) {
     let dbResponse = await dbClient.transaction_Table.create({
     data: transaction})
+    await dbClient.listings.update({
+      where: { id: Number(req.body.listing) },
+      data: { forSale: false }
+    })
     res.json({ data: dbResponse })
   }
   res.status(500).json({ 
@@ -34,13 +38,14 @@ export async function createOne(req: Request, res: Response){
 
 export async function retrieveAll(req: Request, res: Response){
   const authDetails = req.currentUser as User
-  
+  console.log(authDetails)
+
   let dbResponseSold = await dbClient.transaction_Table.findMany({
-    include: {Listing: {
+    where: {previous_ownerId : authDetails.id},
+     include: {Listing: {
       include: {Track: true}},
         previous_owner: {select: {id: true, email: true, username: true, name: true}},
         new_owner:{select: {id: true, email: true, username: true, name: true}}},
-    //where: {previous_ownerId : Number(authDetails.id)}
   })
 
   if (!dbResponseSold) res.status(500).json({ 
@@ -52,7 +57,7 @@ export async function retrieveAll(req: Request, res: Response){
       include: {Track: true}},
         previous_owner: {select: {id: true, email: true, username: true, name: true}},
         new_owner:{select: {id: true, email: true, username: true, name: true}}},
-    //where: {previous_ownerId: Number(authDetails.id)}
+   where: {new_ownerId: authDetails.id}
   })
 
   if (!dbResponseBought) res.status(500).json({ 
